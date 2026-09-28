@@ -27,10 +27,10 @@
 
       /* ---------- background ---------- */
       #bg { position: absolute; inset: 0; }
-      .glow-a { position: absolute; width: 1400px; height: 1400px; left: -160px; top: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(131, 53, 241, 0.42), rgba(131, 53, 241, 0) 62%); }
-      .glow-b { position: absolute; width: 1000px; height: 1000px; right: -520px; top: -420px; border-radius: 50%; background: radial-gradient(circle, rgba(169, 123, 255, 0.28), rgba(169, 123, 255, 0) 62%); }
+      .glow-a { position: absolute; width: 1400px; height: 1400px; left: -160px; top: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(131, 53, 241, 0.26), rgba(131, 53, 241, 0) 62%); }
+      .glow-b { position: absolute; width: 1000px; height: 1000px; right: -520px; top: -420px; border-radius: 50%; background: radial-gradient(circle, rgba(169, 123, 255, 0.14), rgba(169, 123, 255, 0) 62%); }
       .scan { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, rgba(231, 225, 243, 0.05) 0 2px, transparent 2px 6px); }
-      .grid-lines { position: absolute; inset: -60px; background-image: linear-gradient(rgba(169, 123, 255, 0.12) 2px, transparent 2px), linear-gradient(90deg, rgba(169, 123, 255, 0.12) 2px, transparent 2px); background-size: 120px 120px; }
+      .grid-lines { position: absolute; inset: -60px; background-image: linear-gradient(rgba(169, 123, 255, 0.06) 2px, transparent 2px), linear-gradient(90deg, rgba(169, 123, 255, 0.06) 2px, transparent 2px); background-size: 120px 120px; }
 
       .scene { position: absolute; inset: 0; }
       .in { position: absolute; inset: 0; }
@@ -51,7 +51,7 @@
 
       /* ---------- phone ---------- */
       #phone-wrap { position: absolute; left: 190px; top: 490px; width: 700px; height: 1290px; }
-      .phone { position: absolute; inset: 0; border-radius: 92px; background: #05020d; padding: 16px; box-shadow: 0 0 0 3px #3a2170, 0 0 140px -10px rgba(131, 53, 241, 0.6); }
+      .phone { position: absolute; inset: 0; border-radius: 92px; background: #05020d; padding: 16px; box-shadow: 0 0 0 3px #2c1a55, 0 40px 120px -30px rgba(0, 0, 0, 0.8); }
       .screen { position: relative; width: 100%; height: 100%; border-radius: 78px; overflow: hidden; background: #1a0a40; }
       .island { position: absolute; left: 50%; top: 22px; width: 170px; height: 46px; margin-left: -85px; border-radius: 30px; background: #05020d; z-index: 20; }
       .sbar { position: absolute; left: 0; right: 0; top: 0; height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 62px; font-size: 26px; font-weight: 700; z-index: 19; }
@@ -60,7 +60,7 @@
       .sbar .ic b::after { content: ""; position: absolute; left: 3px; top: 3px; bottom: 3px; width: 26px; border-radius: 3px; background: var(--white); }
       .layer { position: absolute; inset: 0; }
       #l-home, #l-loop, #l-chat, #l-st { opacity: 0; }
-      .wall { position: absolute; inset: 0; background: radial-gradient(120% 70% at 30% 20%, #6d28d9 0%, #2a0c6b 45%, #12052e 100%); }
+      .wall { position: absolute; inset: 0; background: radial-gradient(120% 70% at 30% 15%, #3b1590 0%, #1d0a4d 45%, #0d0424 100%); }
 
       /* lock */
       .clock { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-family: var(--display); font-weight: 700; font-size: 168px; letter-spacing: -0.04em; line-height: 1; }
@@ -75,14 +75,14 @@
       .notif .body { flex: 1; }
 
       /* app icon colors */
-      .c-loop { background: linear-gradient(150deg, #ff4d8d, #8335f1); }
-      .c-chat { background: linear-gradient(150deg, #36d399, #0e8f6a); }
-      .c-loja { background: linear-gradient(150deg, #ffb547, #ff7a1a); }
-      .c-st { background: linear-gradient(150deg, #a97bff, #5b21b6); }
-      .c-gal { background: linear-gradient(150deg, #5ec8ff, #2563eb); }
-      .c-cfg { background: linear-gradient(150deg, #8b8fa8, #4a4e66); }
-      .c-sty { background: linear-gradient(150deg, #ff7ad9, #c026d3); }
-      .c-wal { background: linear-gradient(150deg, #facc15, #ca8a04); }
+      .c-loop { background: #24104f; border: 2px solid #3a2170; }
+      .c-chat { background: #24104f; border: 2px solid #3a2170; }
+      .c-loja { background: #24104f; border: 2px solid #3a2170; }
+      .c-st { background: #24104f; border: 2px solid #3a2170; }
+      .c-gal { background: #24104f; border: 2px solid #3a2170; }
+      .c-cfg { background: #24104f; border: 2px solid #3a2170; }
+      .c-sty { background: #24104f; border: 2px solid #3a2170; }
+      .c-wal { background: #24104f; border: 2px solid #3a2170; }
 
       /* home */
       .widget { position: absolute; left: 44px; right: 44px; top: 130px; height: 190px; border-radius: 40px; background: rgba(247, 244, 249, 0.14); border: 2px solid rgba(247, 244, 249, 0.18); padding: 30px 36px; }
@@ -183,16 +183,16 @@
         <div class="in" id="c2-in"><div class="cap"><div class="lbl">Sistema operacional fictício</div><h2>Um celular inteiro. <em>Dentro do jogo.</em></h2></div></div>
       </section>
       <section id="c3" class="scene clip" data-start="6.28" data-duration="2.45" data-track-index="2">
-        <div class="in" id="c3-in"><div class="cap"><div class="lbl">Home</div><h2>Apps, widgets e <em>notificações.</em></h2></div></div>
+        <div class="in" id="c3-in"><div class="cap"><div class="lbl">Home</div><h2>Cada app disputa <em>a sua atenção.</em></h2></div></div>
       </section>
       <section id="c4" class="scene clip" data-start="8.73" data-duration="3.83" data-track-index="2">
-        <div class="in" id="c4-in"><div class="cap"><div class="lbl">Loop</div><h2>Um feed que <em>nunca acaba.</em></h2></div></div>
+        <div class="in" id="c4-in"><div class="cap"><div class="lbl">Loop</div><h2>Um feed desenhado <em>para não acabar.</em></h2></div></div>
       </section>
       <section id="c5" class="scene clip" data-start="12.56" data-duration="3.26" data-track-index="2">
-        <div class="in" id="c5-in"><div class="cap"><div class="lbl">Chat</div><h2>Personagens com <em>memória e rotina.</em></h2></div></div>
+        <div class="in" id="c5-in"><div class="cap"><div class="lbl">Chat</div><h2>Personagens que <em>lembram de você.</em></h2></div></div>
       </section>
       <section id="c6" class="scene clip" data-start="15.82" data-duration="2.73" data-track-index="2">
-        <div class="in" id="c6-in"><div class="cap"><div class="lbl">Screen Time</div><h2>O sistema <em>aprende com você.</em></h2></div></div>
+        <div class="in" id="c6-in"><div class="cap"><div class="lbl">Screen Time</div><h2>O algoritmo <em>aprende com você.</em></h2></div></div>
       </section>
 
       <!-- The phone: one device from lock screen to Screen Time -->
@@ -244,9 +244,9 @@
                   <div class="feed" id="feed">
                     <div class="vid">
                       <svg class="scene-art" viewBox="0 0 668 1258" preserveAspectRatio="none">
-                        <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9a5c" /><stop offset="0.55" stop-color="#e0487a" /><stop offset="1" stop-color="#3b0f5c" /></linearGradient></defs>
+                        <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a3fb0" /><stop offset="0.55" stop-color="#3a1a7a" /><stop offset="1" stop-color="#3b0f5c" /></linearGradient></defs>
                         <rect width="668" height="1258" fill="url(#sky1)" />
-                        <circle cx="334" cy="520" r="150" fill="#ffd28a" opacity="0.9" />
+                        <circle cx="334" cy="520" r="150" fill="#c9b6f2" opacity="0.9" />
                         <rect x="0" y="760" width="668" height="498" fill="#2a0b45" />
                         <rect x="60" y="700" width="548" height="70" rx="8" fill="#1a0630" />
                         <path d="M250 700 C250 610 270 560 300 540 L292 500 L318 528 C330 524 342 524 354 528 L380 500 L372 540 C402 560 420 610 420 700 Z" fill="#12041f" />
@@ -260,21 +260,21 @@
                         <defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140a3d" /><stop offset="1" stop-color="#3a0f6e" /></linearGradient></defs>
                         <rect width="668" height="1258" fill="url(#sky2)" />
                         <rect x="40" y="380" width="120" height="700" fill="#22105a" /><rect x="190" y="260" width="150" height="820" fill="#2c1570" /><rect x="370" y="420" width="110" height="660" fill="#22105a" /><rect x="500" y="300" width="140" height="780" fill="#2c1570" />
-                        <g fill="#ff4d8d"><rect x="210" y="300" width="30" height="20" /><rect x="270" y="360" width="30" height="20" /><rect x="520" y="340" width="30" height="20" /><rect x="60" y="430" width="30" height="20" /></g>
-                        <g fill="#5ec8ff"><rect x="270" y="300" width="30" height="20" /><rect x="580" y="400" width="30" height="20" /><rect x="400" y="470" width="30" height="20" /></g>
+                        <g fill="#a97bff"><rect x="210" y="300" width="30" height="20" /><rect x="270" y="360" width="30" height="20" /><rect x="520" y="340" width="30" height="20" /><rect x="60" y="430" width="30" height="20" /></g>
+                        <g fill="#7c6bd6"><rect x="270" y="300" width="30" height="20" /><rect x="580" y="400" width="30" height="20" /><rect x="400" y="470" width="30" height="20" /></g>
                         <rect x="0" y="1060" width="668" height="198" fill="#0d0526" />
                         <path d="M0 1060 L668 1060" stroke="#a97bff" stroke-width="6" />
-                        <rect x="250" y="1000" width="170" height="16" rx="8" fill="#ffb547" /><circle cx="275" cy="1030" r="16" fill="#f7f4f9" /><circle cx="395" cy="1030" r="16" fill="#f7f4f9" />
+                        <rect x="250" y="1000" width="170" height="16" rx="8" fill="#8a78c0" /><circle cx="275" cy="1030" r="16" fill="#f7f4f9" /><circle cx="395" cy="1030" r="16" fill="#f7f4f9" />
                       </svg>
                       <div class="shade"></div>
                       <div class="meta"><b>@neon.skate</b><p>a cidade de noite é outro jogo</p></div>
                     </div>
                     <div class="vid">
                       <svg class="scene-art" viewBox="0 0 668 1258" preserveAspectRatio="none">
-                        <rect width="668" height="1258" fill="#1f5f4f" />
-                        <circle cx="334" cy="560" r="230" fill="#ffd28a" />
-                        <circle cx="334" cy="560" r="150" fill="#ff9a5c" />
-                        <circle cx="334" cy="560" r="70" fill="#e0487a" />
+                        <rect width="668" height="1258" fill="#1a0f3d" />
+                        <circle cx="334" cy="560" r="230" fill="#c9b6f2" />
+                        <circle cx="334" cy="560" r="150" fill="#6a3fb0" />
+                        <circle cx="334" cy="560" r="70" fill="#3a1a7a" />
                       </svg>
                       <div class="shade"></div>
                       <div class="meta"><b>@receita.em.30s</b><p>o doce mais viral da semana</p></div>
@@ -286,7 +286,7 @@
                     <div class="it"><svg viewBox="0 0 24 24" fill="#f7f4f9"><path d="M4 5h16v11H9l-5 4z" /></svg><span>318</span></div>
                     <div class="it"><svg viewBox="0 0 24 24" fill="#f7f4f9"><path d="M14 5l7 7-7 7v-4c-5 0-8 1.5-10 5 0-6 3-10 10-11z" /></svg><span>Enviar</span></div>
                   </div>
-                  <div class="heart-burst" id="burst"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="#ff4d8d" /></svg></div>
+                  <div class="heart-burst" id="burst"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="#a97bff" /></svg></div>
                   <div class="progress"><i id="prog"></i></div>
                 </div>
 
@@ -297,7 +297,7 @@
                   <div class="msgs">
                     <div class="bub them" id="m1">vi que você assistiu o vídeo do gato 3 vezes</div>
                     <div class="bub them" id="m2">quer que eu te mande mais uns?</div>
-                    <div class="bub me" id="m3">manda</div>
+                    <div class="bub me" id="m3">pode mandar</div>
                   </div>
                   <div class="typing" id="typing" data-layout-allow-overlap><i></i><i></i><i></i></div>
                   <div class="composer">Mensagem...</div>
@@ -311,9 +311,9 @@
                     <div class="k">Hoje</div>
                     <div class="total">2h 36min</div>
                     <div class="bars">
-                      <div class="bar-row"><div class="top"><span>Loop</span><span>1h 48min</span></div><div class="track"><i id="bar1" style="width: 92%; background: linear-gradient(90deg, #ff4d8d, #8335f1)"></i></div></div>
-                      <div class="bar-row"><div class="top"><span>Chat</span><span>32min</span></div><div class="track"><i id="bar2" style="width: 30%; background: #36d399"></i></div></div>
-                      <div class="bar-row"><div class="top"><span>Loja</span><span>16min</span></div><div class="track"><i id="bar3" style="width: 15%; background: #ffb547"></i></div></div>
+                      <div class="bar-row"><div class="top"><span>Loop</span><span>1h 48min</span></div><div class="track"><i id="bar1" style="width: 92%; background: linear-gradient(90deg, #a97bff, #8335f1)"></i></div></div>
+                      <div class="bar-row"><div class="top"><span>Chat</span><span>32min</span></div><div class="track"><i id="bar2" style="width: 30%; background: #8a78c0"></i></div></div>
+                      <div class="bar-row"><div class="top"><span>Loja</span><span>16min</span></div><div class="track"><i id="bar3" style="width: 15%; background: #8a78c0"></i></div></div>
                     </div>
                     <div class="learned">
                       <div class="k2">O que o algoritmo aprendeu</div>
@@ -338,32 +338,27 @@
             <div class="logo" id="s7-logo"><img src="assets/brand/dopeos_logo.png" alt="" /></div>
             <div class="tag" id="s7-tag">O celular é o jogo. <em>A sua atenção</em><em>move o mundo.</em></div>
             <div class="pill" id="s7-pill">Em desenvolvimento · Android</div>
-            <div class="motto" id="s7-motto">Welcome to a more fun version of the world.</div>
+            
           </div>
         </div>
       </section>
 
       <!-- Audio: music bed + motion-matched SFX, each overlapping clip on its own track -->
-      <audio id="music" src="assets/music/happy-beats-business-moves-vol-10-by-ende-dot-app.mp3" data-start="0" data-duration="22.4" data-track-index="10" data-volume="1"
-        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0.32},{"t":21.2,"v":0.34},{"t":22.4,"v":0}]}]}'></audio>
-      <audio id="sfx-boot" src="assets/sfx/impact/impactGlass_light_001.ogg" data-start="0.28" data-duration="0.21" data-track-index="11" data-volume="0.45"></audio>
-      <audio id="sfx-n1" src="assets/sfx/interface/drop_001.ogg" data-start="3.53" data-duration="0.11" data-track-index="12" data-volume="0.55"></audio>
-      <audio id="sfx-n2" src="assets/sfx/interface/drop_002.ogg" data-start="4.08" data-duration="0.19" data-track-index="13" data-volume="0.5"></audio>
-      <audio id="sfx-n3" src="assets/sfx/interface/drop_001.ogg" data-start="4.62" data-duration="0.11" data-track-index="14" data-volume="0.55"></audio>
-      <audio id="sfx-n4" src="assets/sfx/interface/drop_002.ogg" data-start="5.17" data-duration="0.19" data-track-index="15" data-volume="0.5"></audio>
+      <audio id="music" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="22.4" data-track-index="10" data-volume="1"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.8,"v":0.28},{"t":20.8,"v":0.28},{"t":22.4,"v":0}]}]}'></audio>
+            <audio id="sfx-n1" src="assets/sfx/interface/drop_001.ogg" data-start="3.53" data-duration="0.11" data-track-index="12" data-volume="0.38"></audio>
+      <audio id="sfx-n2" src="assets/sfx/interface/drop_002.ogg" data-start="4.08" data-duration="0.19" data-track-index="13" data-volume="0.34"></audio>
+      <audio id="sfx-n3" src="assets/sfx/interface/drop_001.ogg" data-start="4.62" data-duration="0.11" data-track-index="14" data-volume="0.38"></audio>
+      <audio id="sfx-n4" src="assets/sfx/interface/drop_002.ogg" data-start="5.17" data-duration="0.19" data-track-index="15" data-volume="0.34"></audio>
       <audio id="sfx-tap" src="assets/sfx/ui/click2.ogg" data-start="8.18" data-duration="0.06" data-track-index="16" data-volume="0.75"></audio>
       <audio id="sfx-open" src="assets/sfx/ui/rollover2.ogg" data-start="8.71" data-duration="0.06" data-track-index="17" data-volume="0.6"></audio>
-      <audio id="sfx-like" src="assets/sfx/impact/impactSoft_medium_001.ogg" data-start="9.81" data-duration="0.18" data-track-index="18" data-volume="0.6"></audio>
-      <audio id="sfx-sw1" src="assets/sfx/casino/card-slide-1.ogg" data-start="10.36" data-duration="0.6" data-track-index="19" data-volume="0.32"></audio>
-      <audio id="sfx-sw2" src="assets/sfx/casino/card-slide-1.ogg" data-start="11.45" data-duration="0.6" data-track-index="20" data-volume="0.3"></audio>
+            <audio id="sfx-sw1" src="assets/sfx/casino/card-slide-1.ogg" data-start="10.36" data-duration="0.6" data-track-index="19" data-volume="0.2"></audio>
+      <audio id="sfx-sw2" src="assets/sfx/casino/card-slide-1.ogg" data-start="11.45" data-duration="0.6" data-track-index="20" data-volume="0.18"></audio>
       <audio id="sfx-m1" src="assets/sfx/interface/drop_002.ogg" data-start="12.98" data-duration="0.19" data-track-index="21" data-volume="0.5"></audio>
-      <audio id="sfx-k1" src="assets/sfx/keyboard/keypress-003.wav" data-start="13.66" data-duration="0.25" data-track-index="22" data-volume="0.25"></audio>
-      <audio id="sfx-k2" src="assets/sfx/keyboard/keypress-011.wav" data-start="13.84" data-duration="0.25" data-track-index="23" data-volume="0.22"></audio>
-      <audio id="sfx-k3" src="assets/sfx/keyboard/keypress-018.wav" data-start="14.0" data-duration="0.25" data-track-index="24" data-volume="0.25"></audio>
-      <audio id="sfx-m2" src="assets/sfx/interface/drop_001.ogg" data-start="14.18" data-duration="0.11" data-track-index="25" data-volume="0.5"></audio>
+                        <audio id="sfx-m2" src="assets/sfx/interface/drop_001.ogg" data-start="14.18" data-duration="0.11" data-track-index="25" data-volume="0.5"></audio>
       <audio id="sfx-m3" src="assets/sfx/ui/click2.ogg" data-start="14.71" data-duration="0.06" data-track-index="26" data-volume="0.6"></audio>
       <audio id="sfx-ch" src="assets/sfx/interface/bong_001.ogg" data-start="16.91" data-duration="0.12" data-track-index="27" data-volume="0.45"></audio>
-      <audio id="sfx-logo" src="assets/sfx/impact/impactBell_heavy_004.ogg" data-start="18.53" data-duration="0.3" data-track-index="28" data-volume="0.55"></audio>
+      <audio id="sfx-logo" src="assets/sfx/impact/impactBell_heavy_000.ogg" data-start="18.54" data-duration="1.48" data-track-index="28" data-volume="0.4"></audio>
     </div>
 
     <script>
@@ -394,12 +389,12 @@
           });
 
           // ---------- scene 1: boot ----------
-          tl.fromTo("#s1-logo", { scale: 0.5, opacity: 0, rotation: -8 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.8, ease: "back.out(1.7)" }, 0.27);
+          tl.fromTo("#s1-logo", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.1, ease: "power2.out" }, 0.27);
           tl.fromTo("#s1-boot", { scaleX: 0 }, { scaleX: 1, duration: 1.6, ease: "power2.inOut" }, 0.5);
           tl.fromTo("#s1-t", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.82);
 
           // ---------- phone entrance ----------
-          tl.fromTo("#phone-wrap", { y: 260, rotation: 4, scale: 0.9 }, { y: 0, rotation: 0, scale: 1, duration: 0.7, ease: "expo.out" }, 3.01);
+          tl.fromTo("#phone-wrap", { y: 160, scale: 0.96 }, { y: 0, scale: 1, duration: 0.8, ease: "power3.out" }, 3.01);
 
           // ---------- screen layers (hidden until their turn) ----------
           tl.fromTo("#l-home", { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" }, 6.3);
@@ -414,11 +409,11 @@
           // ---------- lock: notifications on the beat grid ----------
           // beat-grid: notif 1 at 3.55s, 2 at 4.10s, 3 at 4.64s, 4 at 5.19s (the set then holds together)
           [3.55, 4.1, 4.64, 5.19].forEach(function (t, i) {
-            tl.fromTo("#n" + (i + 1), { opacity: 0, y: -60, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.42, ease: "back.out(1.8)" }, t - 0.03);
+            tl.fromTo("#n" + (i + 1), { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, t - 0.03);
           });
 
           // ---------- home: apps arrive, finger taps Loop ----------
-          tl.fromTo("#apps .app", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)", stagger: 0.05 }, 6.35);
+          tl.fromTo("#apps .app", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", stagger: 0.04 }, 6.35);
           tl.fromTo("#tap", { opacity: 0, scale: 1.6, x: tx, y: ty }, { opacity: 1, scale: 1, x: tx, y: ty, duration: 0.25, ease: "power2.out" }, 7.95);
           tl.to("#tap", { scale: 0.8, duration: 0.1 }, 8.2);
           tl.to("#app-loop .ai", { scale: 0.88, duration: 0.1 }, 8.2);
@@ -426,20 +421,20 @@
 
           // ---------- loop: like, then two swipes ----------
           tl.fromTo("#prog", { scaleX: 0 }, { scaleX: 1, duration: 3.8, ease: "none" }, 8.73);
-          tl.fromTo("#burst", { opacity: 0, scale: 0.2, rotation: -15 }, { opacity: 1, scale: 1.1, rotation: 0, duration: 0.3, ease: "back.out(3)" }, 9.83);
+          tl.fromTo("#burst", { opacity: 0, scale: 0.8 }, { opacity: 0.85, scale: 1, duration: 0.3, ease: "power2.out" }, 9.83);
           tl.to("#burst", { opacity: 0, y: -60, duration: 0.35, ease: "power2.in" }, 10.14);
-          tl.fromTo("#heart-ic", { fill: "#f7f4f9" }, { fill: "#ff4d8d", duration: 0.1 }, 9.86);
+          tl.fromTo("#heart-ic", { fill: "#f7f4f9" }, { fill: "#a97bff", duration: 0.1 }, 9.86);
           tl.set("#likes", { textContent: "12,5 mil" }, 9.86);
           tl.to("#feed", { y: -1258, duration: 0.45, ease: "power3.inOut" }, 10.38);
           tl.to("#feed", { y: -2516, duration: 0.45, ease: "power3.inOut" }, 11.47);
 
           // ---------- chat ----------
-          tl.fromTo("#m1", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)", transformOrigin: "0% 100%" }, 13.0);
+          tl.fromTo("#m1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 13.0);
           tl.fromTo("#typing", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 13.62);
           tl.fromTo("#typing i", { y: 0 }, { y: -8, duration: 0.18, yoyo: true, repeat: 1, stagger: 0.09, ease: "sine.inOut" }, 13.7);
           tl.to("#typing", { opacity: 0, duration: 0.05 }, 14.15);
-          tl.fromTo("#m2", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)", transformOrigin: "0% 100%" }, 14.2);
-          tl.fromTo("#m3", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.8)", transformOrigin: "100% 100%" }, 14.73);
+          tl.fromTo("#m2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 14.2);
+          tl.fromTo("#m3", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 14.73);
 
           // ---------- screen time ----------
           ["#bar1", "#bar2", "#bar3"].forEach(function (b, i) {
@@ -447,15 +442,15 @@
           });
           // beat-grid: chips at 16.93s / 17.47s / 18.01s
           [16.93, 17.47, 18.01].forEach(function (t, i) {
-            tl.fromTo("#ch" + (i + 1), { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.35, ease: "back.out(1.6)" }, t - 0.02);
+            tl.fromTo("#ch" + (i + 1), { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, t - 0.02);
           });
 
           // ---------- outro ----------
           // beat-locked: 18.55s (strong cue) — logo lands
-          tl.fromTo("#s7-logo", { scale: 0.4, rotation: 10, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.7, ease: "back.out(1.8)" }, 18.55);
+          tl.fromTo("#s7-logo", { scale: 0.92, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.0, ease: "power2.out" }, 18.55);
           tl.fromTo("#s7-tag", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 18.9);
           tl.fromTo("#s7-pill", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 19.35);
-          tl.fromTo("#s7-motto", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 19.7);
+          
 
           // ---------- audio-reactive: bass drives the purple glow and the logo halo ----------
           var A = window.AUDIO_DATA;
@@ -466,9 +461,9 @@
               (function (b) {
                 return function () {
                   var e = Math.min(1, b * 2.2);
-                  glow.style.opacity = String(0.65 + 0.35 * e);
-                  glow.style.scale = String(1 + 0.1 * e);
-                  var sh = "0 0 " + (110 + 60 * e).toFixed(0) + "px " + (8 + 14 * e).toFixed(0) + "px rgba(131, 53, 241, " + (0.45 + 0.3 * e).toFixed(3) + ")";
+                  glow.style.opacity = String(0.8 + 0.2 * e);
+                  glow.style.scale = String(1 + 0.04 * e);
+                  var sh = "0 0 " + (90 + 30 * e).toFixed(0) + "px " + (4 + 6 * e).toFixed(0) + "px rgba(131, 53, 241, " + (0.3 + 0.15 * e).toFixed(3) + ")";
                   logos[0].style.boxShadow = sh;
                   logos[1].style.boxShadow = sh;
                 };

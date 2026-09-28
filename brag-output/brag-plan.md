@@ -22,9 +22,9 @@ Logo oficial + "O celular é o jogo. A sua atenção move o mundo." + "Em desenv
 Boot → bloqueio → home → Loop → Chat → Screen Time (a sequência de uso descrita no README). O código do app não é público: as telas são recriadas a partir das descrições do README.
 
 ## Tone
-- Preset: default (com toque de `chaotic` nas notificações)
-- Creative direction: "o celular que quer a sua atenção" — divertido, levemente inquietante, visual digital roxo
-- Interpretation: 7 cenas rápidas, entradas com mola, notificações em ritmo de batida; texto sempre parado tempo suficiente para ler.
+- Preset: polished (revisão: o usuário pediu um tom mais sério)
+- Creative direction: "o celular que disputa a sua atenção" — sóbrio, levemente inquietante, roxo escuro
+- Interpretation: movimentos sem quique, brilho contido, ícones em roxo escuro, música mais calma (vol-12) e poucos sons.
 
 ## Format: vertical — 1080x1920
 ## Duration: 22.4s
@@ -42,7 +42,7 @@ E se o celular fosse o jogo? DopeOS: um sistema operacional fictício com feed i
 
 ## Audio direction
 - Role: dense-ish rhythmic layer, punchy
-- Music: `happy-beats-business-moves-vol-10-by-ende-dot-app.mp3` (109.96 BPM)
+- Music: `happy-beats-business-moves-vol-12-by-ende-dot-app.mp3` (109.96 BPM)
 - Music treatment: ~0.34, fade-out no último 1.2s
 - Music cue guidance: preset vol-10. Strong cue 18.55s → logo final. Beat grid: notificações em 3.55 / 4.64 / 5.19(… a cada 2 batidas para leitura), cortes de cena em 3.01, 6.28, 8.73, 12.56, 15.82.
 - Audio-reactive treatment: subtle; brilho roxo da cápsula e do fundo respira com o grave.
