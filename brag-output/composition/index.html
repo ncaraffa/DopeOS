@@ -156,56 +156,93 @@
       #s7 .tag em { font-style: normal; color: var(--purple-lite); display: block; }
       #s7 .pill { margin-top: 70px; padding: 18px 34px; border-radius: 999px; border: 2px solid rgba(169, 123, 255, 0.6); background: rgba(131, 53, 241, 0.22); font-size: 32px; font-weight: 600; }
       #s7 .motto { margin-top: 44px; font-size: 32px; font-style: italic; color: var(--muted); }
+    
+      @font-face { font-family: "JetBrains Mono"; font-weight: 500; src: url("assets/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 600; src: url("assets/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2"); }
+      /* ============ MYSTERY CUT ============ */
+      html, body, #root { background: #07030f; }
+      .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+      #l-home, #l-loop, #l-chat, #l-st { opacity: 1; }
+      .bg-void { position: absolute; inset: 0; background: radial-gradient(80% 50% at 50% 45%, #1a0b3d 0%, #0b0520 55%, #07030f 100%); }
+      .grain { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, rgba(231,225,243,0.035) 0 2px, transparent 2px 5px); }
+      .vignette { position: absolute; inset: 0; background: radial-gradient(100% 70% at 50% 50%, rgba(7,3,15,0) 45%, rgba(7,3,15,0.85) 100%); }
+
+      /* scene 1: signal */
+      #s1 .pill { position: absolute; left: 390px; top: 820px; width: 300px; height: 120px; }
+      #s1 .pill-in { width: 100%; height: 100%; border-radius: 60px; overflow: hidden; display: flex; box-shadow: 0 0 60px 6px rgba(131, 53, 241, 0.5); }
+      #s1 .pill-in i { display: block; flex: 1; }
+      #s1 .pill-in i:first-child { background: linear-gradient(160deg, #a97bff, #5b21b6); }
+      #s1 .pill-in i:last-child { background: linear-gradient(160deg, #ffffff, #d9cff0); }
+      #s1 .sig { position: absolute; left: 0; right: 0; top: 1160px; text-align: center; font-size: 30px; font-weight: 500; letter-spacing: 0.3em; color: #b9acd6; }
+      #s1 .line { position: absolute; left: 140px; right: 140px; top: 1110px; height: 2px; background: linear-gradient(90deg, rgba(169,123,255,0), #a97bff, rgba(169,123,255,0)); transform-origin: center; }
+
+      /* scene 2: 3D world */
+      #s2 { overflow: hidden; }
+      .stage { position: absolute; inset: 0; perspective: 1000px; }
+      .world { position: absolute; inset: 0; transform-style: preserve-3d; transform-origin: 50% 50%; will-change: transform; }
+      .floor { position: absolute; left: -2460px; top: 1740px; width: 6000px; height: 7000px; transform-origin: 50% 0%; transform: rotateX(90deg);
+        background-image: linear-gradient(rgba(169,123,255,0.22) 3px, transparent 3px), linear-gradient(90deg, rgba(169,123,255,0.22) 3px, transparent 3px); background-size: 200px 200px; }
+      .card3d { position: absolute; left: 238px; top: 331px; width: 604px; height: 1134px; transform-style: preserve-3d; }
+      .card-in { position: absolute; inset: 0; border-radius: 70px; overflow: hidden; background: #05020d; padding: 14px; box-shadow: 0 0 0 3px #3a2170, 0 0 120px -20px rgba(131,53,241,0.55); --dof: 0px; filter: blur(var(--dof)); will-change: filter; }
+      .scr { position: relative; width: 668px; height: 1258px; transform: scale(0.8625); transform-origin: 0 0; border-radius: 64px; overflow: hidden; background: #1a0a40; }
+      #ca { transform: translate3d(0px, 0px, 0px) rotateY(-10deg); }
+      #cb { transform: translate3d(980px, -120px, -700px) rotateY(12deg); }
+      #cc { transform: translate3d(-960px, 80px, -1400px) rotateY(-12deg); }
+      #cd { transform: translate3d(120px, -60px, -2150px) rotateY(6deg); }
+      .dust { position: absolute; display: block; border-radius: 50%; background: #c9b6f2; opacity: 0.55; box-shadow: 0 0 12px 2px rgba(169,123,255,0.6); }
+      .blackout { position: absolute; inset: 0; background: #07030f; }
+      .cap2 { position: absolute; left: 80px; right: 80px; top: 120px; }
+      .cap2 .k { font-size: 26px; font-weight: 500; letter-spacing: 0.28em; color: #a97bff; text-transform: uppercase; }
+      .cap2 h2 { margin-top: 14px; font-family: var(--display); font-weight: 700; font-size: 74px; line-height: 1.04; letter-spacing: -0.03em; color: #f7f4f9; }
+      .cap2 h2 em { font-style: normal; color: #a97bff; }
+
+      /* scene 3: the motto */
+      #s3 .wrap { position: absolute; left: 100px; right: 60px; top: 560px; perspective: 1500px; }
+      #s3 .tagk { font-size: 26px; font-weight: 500; letter-spacing: 0.3em; color: #a97bff; margin-bottom: 40px; }
+      #s3 .stackm { position: relative; }
+      #s3 .mline { display: block; font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 118px; line-height: 1.16; letter-spacing: -0.02em; color: #f7f4f9; white-space: pre; }
+      #s3 .hc { display: inline-block; transform-origin: 50% 100%; transform-style: preserve-3d; }
+      #s3 .hc.fun { color: #f7f4f9; }
+      .gcopy { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen; pointer-events: none; }
+      .gcopy .mline { color: inherit; }
+      .gcopy.warm { color: #ff4d8d; }
+      .gcopy.cool { color: #5ec8ff; }
+      #s3 .rule { margin-top: 50px; width: 360px; height: 4px; background: #8335f1; transform-origin: left center; }
+
+      /* scene 4: logo */
+      #s4 .col { position: absolute; left: 0; right: 0; top: 520px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+      #s4 .bloom { position: absolute; left: 90px; top: 250px; width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(131,53,241,0.45), rgba(131,53,241,0) 62%); }
+      #s4 .logo { width: 420px; height: 420px; border-radius: 92px; overflow: hidden; }
+      #s4 .logo img { width: 100%; height: 100%; display: block; }
+      #s4 .motto2 { margin-top: 80px; font-family: var(--display); font-weight: 700; font-size: 58px; line-height: 1.15; letter-spacing: -0.02em; color: #f7f4f9; width: 900px; }
+      #s4 .motto2 em { font-style: normal; color: #a97bff; }
+      #s4 .dev { margin-top: 56px; font-size: 24px; font-weight: 500; letter-spacing: 0.24em; color: #b9acd6; text-transform: uppercase; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="22.4" data-width="1080" data-height="1920">
-      <div id="bg" class="clip" data-start="0" data-duration="22.4" data-track-index="0">
-        <div class="grid-lines" id="bg-grid" data-layout-allow-overflow></div>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="23" data-width="1080" data-height="1920">
+      <div id="bg" class="clip" data-start="0" data-duration="23" data-track-index="0">
+        <div class="bg-void" id="bg-void"></div>
         <div class="glow-a" id="glow-a" data-layout-allow-overflow></div>
-        <div class="glow-b" id="glow-b" data-layout-allow-overflow></div>
-        <div class="scan"></div>
+        <div class="grain"></div>
       </div>
 
-      <!-- Scene 1: boot -->
-      <section id="s1" class="scene clip" data-start="0" data-duration="3.01" data-track-index="1">
+      <!-- Scene 1: the signal -->
+      <section id="s1" class="scene clip" data-start="0" data-duration="3.3" data-track-index="1">
         <div class="in" id="s1-in">
-          <div class="col">
-            <div class="logo" id="s1-logo"><img src="assets/brand/dopeos_logo.png" alt="" /></div>
-            <div class="boot"><i id="s1-boot"></i></div>
-            <div class="t" id="s1-t">O celular é o jogo.</div>
-          </div>
+          <div class="line" id="s1-line"></div>
+          <div class="pill" id="s1-pill"><div class="pill-in" id="s1-pillin"><i></i><i></i></div></div>
+          <div class="sig mono" id="s1-sig">SINAL DETECTADO</div>
         </div>
       </section>
 
-      <!-- Captions for the phone scenes -->
-      <section id="c2" class="scene clip" data-start="3.01" data-duration="3.27" data-track-index="2">
-        <div class="in" id="c2-in"><div class="cap"><div class="lbl">Sistema operacional fictício</div><h2>Um celular inteiro. <em>Dentro do jogo.</em></h2></div></div>
-      </section>
-      <section id="c3" class="scene clip" data-start="6.28" data-duration="2.45" data-track-index="2">
-        <div class="in" id="c3-in"><div class="cap"><div class="lbl">Home</div><h2>Cada app disputa <em>a sua atenção.</em></h2></div></div>
-      </section>
-      <section id="c4" class="scene clip" data-start="8.73" data-duration="3.83" data-track-index="2">
-        <div class="in" id="c4-in"><div class="cap"><div class="lbl">Loop</div><h2>Um feed desenhado <em>para não acabar.</em></h2></div></div>
-      </section>
-      <section id="c5" class="scene clip" data-start="12.56" data-duration="3.26" data-track-index="2">
-        <div class="in" id="c5-in"><div class="cap"><div class="lbl">Chat</div><h2>Personagens que <em>lembram de você.</em></h2></div></div>
-      </section>
-      <section id="c6" class="scene clip" data-start="15.82" data-duration="2.73" data-track-index="2">
-        <div class="in" id="c6-in"><div class="cap"><div class="lbl">Screen Time</div><h2>O algoritmo <em>aprende com você.</em></h2></div></div>
-      </section>
-
-      <!-- The phone: one device from lock screen to Screen Time -->
-      <section id="ph" class="scene clip" data-start="3.01" data-duration="15.54" data-track-index="3">
-        <div class="in" id="ph-in">
-          <div id="phone-wrap">
-            <div class="phone">
-              <div class="screen">
-                <div class="island"></div>
-                <div class="sbar"><span>21:47</span><span class="ic"><b></b></span></div>
-
-                <!-- lock -->
-                <div class="layer" id="l-lock">
+      <!-- Scene 2: 3D camera flight through the DopeOS screens -->
+      <section id="s2" class="scene clip" data-start="3.1" data-duration="9.8" data-track-index="2">
+        <div class="stage" id="stage">
+          <div class="world" id="world" data-layout-allow-overflow>
+            <div class="floor"></div>
+            <i class="dust" style="left:0px; top:0px; transform: translateZ(-200px); width:4px; height:4px"></i><i class="dust" style="left:397px; top:683px; transform: translateZ(-411px); width:7px; height:7px"></i><i class="dust" style="left:794px; top:1366px; transform: translateZ(-622px); width:10px; height:10px"></i><i class="dust" style="left:111px; top:129px; transform: translateZ(-833px); width:4px; height:4px"></i><i class="dust" style="left:508px; top:812px; transform: translateZ(-1044px); width:7px; height:7px"></i><i class="dust" style="left:905px; top:1495px; transform: translateZ(-1255px); width:10px; height:10px"></i><i class="dust" style="left:222px; top:258px; transform: translateZ(-1466px); width:4px; height:4px"></i><i class="dust" style="left:619px; top:941px; transform: translateZ(-1677px); width:7px; height:7px"></i><i class="dust" style="left:1016px; top:1624px; transform: translateZ(-1888px); width:10px; height:10px"></i><i class="dust" style="left:333px; top:387px; transform: translateZ(-2099px); width:4px; height:4px"></i><i class="dust" style="left:730px; top:1070px; transform: translateZ(-2310px); width:7px; height:7px"></i><i class="dust" style="left:47px; top:1753px; transform: translateZ(-2521px); width:10px; height:10px"></i><i class="dust" style="left:444px; top:516px; transform: translateZ(-2732px); width:4px; height:4px"></i><i class="dust" style="left:841px; top:1199px; transform: translateZ(-343px); width:7px; height:7px"></i><i class="dust" style="left:158px; top:1882px; transform: translateZ(-554px); width:10px; height:10px"></i><i class="dust" style="left:555px; top:645px; transform: translateZ(-765px); width:4px; height:4px"></i><i class="dust" style="left:952px; top:1328px; transform: translateZ(-976px); width:7px; height:7px"></i><i class="dust" style="left:269px; top:91px; transform: translateZ(-1187px); width:10px; height:10px"></i><i class="dust" style="left:666px; top:774px; transform: translateZ(-1398px); width:4px; height:4px"></i><i class="dust" style="left:1063px; top:1457px; transform: translateZ(-1609px); width:7px; height:7px"></i><i class="dust" style="left:380px; top:220px; transform: translateZ(-1820px); width:10px; height:10px"></i><i class="dust" style="left:777px; top:903px; transform: translateZ(-2031px); width:4px; height:4px"></i><i class="dust" style="left:94px; top:1586px; transform: translateZ(-2242px); width:7px; height:7px"></i><i class="dust" style="left:491px; top:349px; transform: translateZ(-2453px); width:10px; height:10px"></i><i class="dust" style="left:888px; top:1032px; transform: translateZ(-2664px); width:4px; height:4px"></i><i class="dust" style="left:205px; top:1715px; transform: translateZ(-275px); width:7px; height:7px"></i><i class="dust" style="left:602px; top:478px; transform: translateZ(-486px); width:10px; height:10px"></i><i class="dust" style="left:999px; top:1161px; transform: translateZ(-697px); width:4px; height:4px"></i><i class="dust" style="left:316px; top:1844px; transform: translateZ(-908px); width:7px; height:7px"></i><i class="dust" style="left:713px; top:607px; transform: translateZ(-1119px); width:10px; height:10px"></i><i class="dust" style="left:30px; top:1290px; transform: translateZ(-1330px); width:4px; height:4px"></i><i class="dust" style="left:427px; top:53px; transform: translateZ(-1541px); width:7px; height:7px"></i><i class="dust" style="left:824px; top:736px; transform: translateZ(-1752px); width:10px; height:10px"></i><i class="dust" style="left:141px; top:1419px; transform: translateZ(-1963px); width:4px; height:4px"></i><i class="dust" style="left:538px; top:182px; transform: translateZ(-2174px); width:7px; height:7px"></i><i class="dust" style="left:935px; top:865px; transform: translateZ(-2385px); width:10px; height:10px"></i><i class="dust" style="left:252px; top:1548px; transform: translateZ(-2596px); width:4px; height:4px"></i><i class="dust" style="left:649px; top:311px; transform: translateZ(-207px); width:7px; height:7px"></i><i class="dust" style="left:1046px; top:994px; transform: translateZ(-418px); width:10px; height:10px"></i><i class="dust" style="left:363px; top:1677px; transform: translateZ(-629px); width:4px; height:4px"></i>
+            <div class="card3d" id="ca" data-layout-ignore><div class="card-in layer-dof" id="ca-dof"><div class="scr"><div class="island"></div><div class="sbar"><span>21:47</span><span class="ic"><b></b></span></div><div class="layer" id="l-lock">
                   <div class="wall"></div>
                   <div class="clock">21:47</div>
                   <div class="date">sábado, 27 de setembro</div>
@@ -217,30 +254,7 @@
                   </div>
                 </div>
 
-                <!-- home -->
-                <div class="layer" id="l-home">
-                  <div class="wall"></div>
-                  <div class="widget"><div class="k">Carteira</div><div class="v">2.450 <small>moedas</small></div></div>
-                  <div class="apps" id="apps">
-                    <div class="app" id="app-loop"><div class="ai c-loop"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l10.5-6.5z" /></svg></div><span>Loop</span></div>
-                    <div class="app"><div class="ai c-chat"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4 5h16v11H9l-5 4z" /></svg></div><span>Chat</span></div>
-                    <div class="app"><div class="ai c-loja"><svg viewBox="0 0 24 24" fill="#fff"><path d="M5 8h14l-1.2 11H6.2z" /><path d="M9 8a3 3 0 0 1 6 0" stroke="#fff" stroke-width="2" fill="none" /></svg></div><span>Loja</span></div>
-                    <div class="app"><div class="ai c-st"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><circle cx="12" cy="12" r="8" /><path d="M12 7.5V12l3 2" /></svg></div><span>Screen Time</span></div>
-                    <div class="app"><div class="ai c-gal"><svg viewBox="0 0 24 24" fill="#fff"><rect x="4" y="5" width="16" height="14" rx="3" /><path d="M6 17l4-5 3 3 2-2 3 4z" fill="#2563eb" /></svg></div><span>Galeria</span></div>
-                    <div class="app"><div class="ai c-sty"><svg viewBox="0 0 24 24" fill="#fff"><circle cx="8" cy="9" r="3" /><circle cx="16" cy="9" r="3" /><circle cx="12" cy="16" r="3" /></svg></div><span>Estilos</span></div>
-                    <div class="app"><div class="ai c-wal"><svg viewBox="0 0 24 24" fill="#fff"><rect x="3.5" y="6" width="17" height="12" rx="3" /><circle cx="16" cy="12" r="1.8" fill="#ca8a04" /></svg></div><span>Carteira</span></div>
-                    <div class="app"><div class="ai c-cfg"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><circle cx="12" cy="12" r="3.2" /><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" /></svg></div><span>Ajustes</span></div>
-                  </div>
-                  <div class="dock">
-                    <div class="ai c-chat"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4 5h16v11H9l-5 4z" /></svg></div>
-                    <div class="ai c-loop"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l10.5-6.5z" /></svg></div>
-                    <div class="ai c-gal"><svg viewBox="0 0 24 24" fill="#fff"><rect x="4" y="5" width="16" height="14" rx="3" /></svg></div>
-                  </div>
-                  <div class="tap" id="tap"></div>
-                </div>
-
-                <!-- loop -->
-                <div class="layer" id="l-loop" style="background: #0a031a">
+                </div></div></div><div class="card3d" id="cb" data-layout-ignore><div class="card-in layer-dof" id="cb-dof"><div class="scr"><div class="island"></div><div class="sbar"><span>21:47</span><span class="ic"><b></b></span></div><div class="layer" id="l-loop" style="background: #0a031a">
                   <div class="feed" id="feed">
                     <div class="vid">
                       <svg class="scene-art" viewBox="0 0 668 1258" preserveAspectRatio="none">
@@ -290,8 +304,7 @@
                   <div class="progress"><i id="prog"></i></div>
                 </div>
 
-                <!-- chat -->
-                <div class="layer" id="l-chat">
+                </div></div></div><div class="card3d" id="cc" data-layout-ignore><div class="card-in layer-dof" id="cc-dof"><div class="scr"><div class="island"></div><div class="sbar"><span>21:47</span><span class="ic"><b></b></span></div><div class="layer" id="l-chat">
                   <div class="chat-bg"></div>
                   <div class="chat-head"><div class="avatar">L</div><div><b>Luna</b><small>online · tomando café</small></div></div>
                   <div class="msgs">
@@ -303,8 +316,7 @@
                   <div class="composer">Mensagem...</div>
                 </div>
 
-                <!-- screen time -->
-                <div class="layer" id="l-st">
+                </div></div></div><div class="card3d" id="cd" data-layout-ignore><div class="card-in layer-dof" id="cd-dof"><div class="scr"><div class="island"></div><div class="sbar"><span>21:47</span><span class="ic"><b></b></span></div><div class="layer" id="l-st">
                   <div class="st-bg"></div>
                   <div class="st">
                     <div class="h">Screen Time</div>
@@ -324,159 +336,225 @@
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </div></div></div>
+          </div>
+        </div>
+        <div class="vignette" data-layout-ignore></div>
+        <div class="cap2" id="c-a"><div class="k mono">Sistema operacional fictício</div><h2>Um sistema <em>inteiro.</em></h2></div><div class="cap2" id="c-b"><div class="k mono">Loop</div><h2>Um feed que <em>não termina.</em></h2></div><div class="cap2" id="c-c"><div class="k mono">Chat</div><h2>Alguém <em>lembra de você.</em></h2></div><div class="cap2" id="c-d"><div class="k mono">Screen Time</div><h2>E tudo <em>aprende com você.</em></h2></div>
+        <div class="blackout" id="blackout"></div>
+      </section>
+
+      <!-- Scene 3: the motto -->
+      <section id="s3" class="scene clip" data-start="12.9" data-duration="6.76" data-track-index="1">
+        <div class="in" id="s3-in">
+          <div class="wrap" id="s3-wrap">
+            <div class="tagk mono" id="s3-k">// DOPEOS</div>
+            <div class="stackm" id="stackm">
+              <div class="gcopy warm" aria-hidden="true" data-layout-ignore><span class="mline">Welcome to</span><span class="mline">a more fun</span><span class="mline">version of</span><span class="mline">the world.</span></div>
+              <div class="gcopy cool" aria-hidden="true" data-layout-ignore><span class="mline">Welcome to</span><span class="mline">a more fun</span><span class="mline">version of</span><span class="mline">the world.</span></div>
+              <div class="base" id="mbase"></div>
             </div>
+            <div class="rule" id="s3-rule"></div>
           </div>
         </div>
       </section>
 
-      <!-- Scene 7: outro -->
-      <section id="s7" class="scene clip" data-start="18.55" data-duration="3.85" data-track-index="1">
-        <div class="in" id="s7-in">
+      <!-- Scene 4: logo -->
+      <section id="s4" class="scene clip" data-start="19.66" data-duration="3.34" data-track-index="1">
+        <div class="in" id="s4-in">
+          <div class="bloom" id="s4-bloom"></div>
           <div class="col">
-            <div class="logo" id="s7-logo"><img src="assets/brand/dopeos_logo.png" alt="" /></div>
-            <div class="tag" id="s7-tag">O celular é o jogo. <em>A sua atenção</em><em>move o mundo.</em></div>
-            <div class="pill" id="s7-pill">Em desenvolvimento · Android</div>
-            
+            <div class="logo" id="s4-logo"><img id="s4-img" src="assets/brand/dopeos_logo.png" alt="" /></div>
+            <div class="motto2" id="s4-motto">Welcome to a more <em>fun</em> version of the world.</div>
+            <div class="dev mono" id="s4-dev">Em desenvolvimento · Android</div>
           </div>
         </div>
       </section>
 
-      <!-- Audio: music bed + motion-matched SFX, each overlapping clip on its own track -->
-      <audio id="music" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="22.4" data-track-index="10" data-volume="1"
-        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.8,"v":0.28},{"t":20.8,"v":0.28},{"t":22.4,"v":0}]}]}'></audio>
-            <audio id="sfx-n1" src="assets/sfx/interface/drop_001.ogg" data-start="3.53" data-duration="0.11" data-track-index="12" data-volume="0.38"></audio>
-      <audio id="sfx-n2" src="assets/sfx/interface/drop_002.ogg" data-start="4.08" data-duration="0.19" data-track-index="13" data-volume="0.34"></audio>
-      <audio id="sfx-n3" src="assets/sfx/interface/drop_001.ogg" data-start="4.62" data-duration="0.11" data-track-index="14" data-volume="0.38"></audio>
-      <audio id="sfx-n4" src="assets/sfx/interface/drop_002.ogg" data-start="5.17" data-duration="0.19" data-track-index="15" data-volume="0.34"></audio>
-      <audio id="sfx-tap" src="assets/sfx/ui/click2.ogg" data-start="8.18" data-duration="0.06" data-track-index="16" data-volume="0.75"></audio>
-      <audio id="sfx-open" src="assets/sfx/ui/rollover2.ogg" data-start="8.71" data-duration="0.06" data-track-index="17" data-volume="0.6"></audio>
-            <audio id="sfx-sw1" src="assets/sfx/casino/card-slide-1.ogg" data-start="10.36" data-duration="0.6" data-track-index="19" data-volume="0.2"></audio>
-      <audio id="sfx-sw2" src="assets/sfx/casino/card-slide-1.ogg" data-start="11.45" data-duration="0.6" data-track-index="20" data-volume="0.18"></audio>
-      <audio id="sfx-m1" src="assets/sfx/interface/drop_002.ogg" data-start="12.98" data-duration="0.19" data-track-index="21" data-volume="0.5"></audio>
-                        <audio id="sfx-m2" src="assets/sfx/interface/drop_001.ogg" data-start="14.18" data-duration="0.11" data-track-index="25" data-volume="0.5"></audio>
-      <audio id="sfx-m3" src="assets/sfx/ui/click2.ogg" data-start="14.71" data-duration="0.06" data-track-index="26" data-volume="0.6"></audio>
-      <audio id="sfx-ch" src="assets/sfx/interface/bong_001.ogg" data-start="16.91" data-duration="0.12" data-track-index="27" data-volume="0.45"></audio>
-      <audio id="sfx-logo" src="assets/sfx/impact/impactBell_heavy_000.ogg" data-start="18.54" data-duration="1.48" data-track-index="28" data-volume="0.4"></audio>
+      <audio id="music" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="23" data-track-index="10" data-volume="1"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":1.6,"v":0.26},{"t":21.6,"v":0.26},{"t":23,"v":0}]}]}'></audio>
+      <audio id="sfx-sig" src="assets/sfx/interface/glitch_002.ogg" data-start="1.2" data-duration="0.03" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sfx-dive" src="assets/sfx/impact/impactSoft_medium_001.ogg" data-start="2.9" data-duration="0.18" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sfx-f1" src="assets/sfx/casino/card-slide-1.ogg" data-start="5.55" data-duration="0.6" data-track-index="13" data-volume="0.14"></audio>
+      <audio id="sfx-f2" src="assets/sfx/casino/card-slide-1.ogg" data-start="7.75" data-duration="0.6" data-track-index="14" data-volume="0.14"></audio>
+      <audio id="sfx-f3" src="assets/sfx/casino/card-slide-1.ogg" data-start="9.95" data-duration="0.6" data-track-index="15" data-volume="0.14"></audio>
+      <audio id="sfx-cut" src="assets/sfx/interface/glitch_004.ogg" data-start="12.8" data-duration="0.02" data-track-index="16" data-volume="0.45"></audio>
+      <audio id="sfx-t1" src="assets/sfx/keyboard/keypress-003.wav" data-start="13.2" data-duration="0.25" data-track-index="17" data-volume="0.14"></audio>
+      <audio id="sfx-t2" src="assets/sfx/keyboard/keypress-011.wav" data-start="13.62" data-duration="0.25" data-track-index="18" data-volume="0.12"></audio>
+      <audio id="sfx-t3" src="assets/sfx/keyboard/keypress-018.wav" data-start="14.04" data-duration="0.25" data-track-index="19" data-volume="0.14"></audio>
+      <audio id="sfx-t4" src="assets/sfx/keyboard/keypress-025.wav" data-start="14.46" data-duration="0.25" data-track-index="20" data-volume="0.12"></audio>
+      <audio id="sfx-glitch" src="assets/sfx/interface/glitch_002.ogg" data-start="17.47" data-duration="0.03" data-track-index="21" data-volume="0.5"></audio>
+      <audio id="sfx-logo" src="assets/sfx/impact/impactBell_heavy_000.ogg" data-start="19.64" data-duration="1.48" data-track-index="22" data-volume="0.38"></audio>
     </div>
 
     <script>
       (function () {
-        var TOTAL = 22.4;
+        var TOTAL = 23;
+        var LINES = ['Welcome to', 'a more fun', 'version of', 'the world.'];
+
+        // ---- decode text: live per-char spans (base) ----
+        var base = document.getElementById("mbase");
+        var chars = [];
+        LINES.forEach(function (line) {
+          var row = document.createElement("span");
+          row.className = "mline";
+          line.split("").forEach(function (ch) {
+            var s = document.createElement("span");
+            s.className = "hc";
+            s.textContent = ch === " " ? "\u00a0" : ch;
+            s.dataset.t = ch;
+            row.appendChild(s);
+            chars.push(s);
+          });
+          base.appendChild(row);
+        });
+        // mark "fun" (line 2, chars 7..9)
+        var funChars = chars.slice(10 + 7, 10 + 10);
+        funChars.forEach(function (c) { c.classList.add("fun"); });
+
+        var GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*/<>";
+        function pseudoGlyph(seed) {
+          var h = ((seed * 9301 + 49297) % 233280) / 233280;
+          return GLYPHS[Math.floor(h * GLYPHS.length)];
+        }
+        function glitchHash(n) {
+          var x = Math.sin(n * 12.9898) * 43758.5453;
+          return x - Math.floor(x);
+        }
 
         function build() {
-          // tap target measured once from layout offsets (transform-free)
-          var appLoop = document.getElementById("app-loop");
-          var apps = document.getElementById("apps");
-          var tx = apps.offsetLeft + appLoop.offsetLeft + appLoop.offsetWidth / 2 - 65;
-          var ty = apps.offsetTop + appLoop.offsetTop + 59 - 65;
-
           var tl = gsap.timeline({ paused: true });
 
-          // ---------- background ambience ----------
-          tl.fromTo("#bg-grid", { y: 0 }, { y: -120, duration: TOTAL, ease: "none" }, 0);
-          tl.fromTo("#glow-b", { x: 0, y: 0 }, { x: -140, y: 80, duration: TOTAL, ease: "sine.inOut" }, 0);
+          // ================= Scene 1: the signal =================
+          tl.fromTo("#s1-line", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 1.2, ease: "power2.out" }, 0.5);
+          tl.fromTo("#s1-pill", { opacity: 0, scale: 0.85, rotation: -38 }, { opacity: 0.9, scale: 1, rotation: -38, duration: 1.4, ease: "power2.out" }, 0.3);
+          tl.fromTo("#s1-sig", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 1.2);
+          tl.to("#s1-sig", { opacity: 0.2, duration: 0.05, yoyo: true, repeat: 3, repeatDelay: 0.12 }, 1.3);
+          // camera dives into the capsule
+          tl.to("#s1-pill", { scale: 14, duration: 0.55, ease: "power4.in" }, 2.75);
+          tl.to(["#s1-line", "#s1-sig"], { opacity: 0, duration: 0.3 }, 2.75);
+          tl.to("#s1-in", { opacity: 0, duration: 0.2 }, 3.1);
 
-          // ---------- scene fades (dip through the background) ----------
-          [["#s1-in", 0, 3.01], ["#c2-in", 3.01, 6.28], ["#c3-in", 6.28, 8.73], ["#c4-in", 8.73, 12.56], ["#c5-in", 12.56, 15.82], ["#c6-in", 15.82, 18.55], ["#ph-in", 3.01, 18.55], ["#s7-in", 18.55, TOTAL]].forEach(function (s) {
-            if (s[1] > 0) tl.fromTo(s[0], { opacity: 0 }, { opacity: 1, duration: 0.26, ease: "power2.out" }, s[1]);
-            if (s[2] < TOTAL) tl.to(s[0], { opacity: 0, duration: 0.24, ease: "power2.in" }, s[2] - 0.24);
+          // ================= Scene 2: 3D camera flight =================
+          var world = document.getElementById("world");
+          var cam = { x: 0, y: 0, z: -2600, rx: 14, ry: 0 };
+          function applyCamera() {
+            world.style.transform = "translate3d(" + cam.x + "px," + cam.y + "px," + cam.z + "px) rotateX(" + cam.rx + "deg) rotateY(" + cam.ry + "deg)";
+          }
+          applyCamera();
+          var LAND = 90;
+          var POSES = {
+            a: { x: 0, y: 60, z: LAND, rx: 0, ry: 4 },
+            b: { x: -980, y: 180, z: 700 + LAND, rx: 0, ry: 0 },
+            c: { x: 960, y: -20, z: 1400 + LAND, rx: 0, ry: 0 },
+            d: { x: -120, y: 120, z: 2150 + LAND, rx: 0, ry: 0 }
+          };
+          var dof = { a: "#ca-dof", b: "#cb-dof", c: "#cc-dof", d: "#cd-dof" };
+          tl.set(["#cb-dof", "#cc-dof", "#cd-dof", "#ca-dof"], { "--dof": "8px" }, 3.1);
+          // LEG 1 — dive in from the dark onto the lock screen
+          tl.fromTo(cam, { x: 0, y: 0, z: -2600, rx: 14, ry: 0 }, { x: POSES.a.x, y: POSES.a.y, z: POSES.a.z, rx: 0, ry: POSES.a.ry, duration: 1.3, ease: "power4.out", onUpdate: applyCamera }, 3.1);
+          tl.to("#ca-dof", { "--dof": "0px", duration: 1.0, ease: "power3.out" }, 3.3);
+          // LEGS 2-4 — fly between screens, rack focus as each one lands
+          [["b", 5.55], ["c", 7.75], ["d", 9.95]].forEach(function (leg, i) {
+            var prev = ["a", "b", "c"][i];
+            tl.to(cam, { x: POSES[leg[0]].x, y: POSES[leg[0]].y, z: POSES[leg[0]].z, ry: POSES[leg[0]].ry, duration: 1.05, ease: "power3.inOut", onUpdate: applyCamera }, leg[1]);
+            tl.to(dof[prev], { "--dof": "10px", duration: 0.7, ease: "power2.in" }, leg[1]);
+            tl.to(dof[leg[0]], { "--dof": "0px", duration: 0.8, ease: "power3.out" }, leg[1] + 0.35);
           });
-          [["#c2", 3.01], ["#c3", 6.28], ["#c4", 8.73], ["#c5", 12.56], ["#c6", 15.82]].forEach(function (c) {
-            tl.fromTo(c[0] + " .lbl", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, c[1] + 0.05);
-            tl.fromTo(c[0] + " h2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, c[1] + 0.12);
+          // hold micro-drift (same writer): tiny rx sway during holds
+          var holds = [[4.4, 5.55], [6.6, 7.75], [8.8, 9.95], [11.0, 12.0]];
+          holds.forEach(function (h) {
+            tl.to(cam, { rx: 1.2, duration: (h[1] - h[0]) / 2, ease: "sine.inOut", yoyo: true, repeat: 1, onUpdate: applyCamera }, h[0]);
           });
+          // PULL BACK into the void, then black
+          tl.to(cam, { z: -3400, rx: 18, x: -60, duration: 0.9, ease: "power3.in", onUpdate: applyCamera }, 12.0);
+          tl.fromTo("#blackout", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.in" }, 12.5);
+          tl.fromTo("#stage", { filter: "blur(0px)" }, { filter: "blur(14px)", duration: 0.6, ease: "power2.in" }, 12.2);
+          // captions land with the camera
+          tl.fromTo("#c-a", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 4.2);
+          tl.to("#c-a", { opacity: 0, duration: 0.3, ease: "power2.in" }, 5.25);
+          tl.fromTo("#c-b", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 6.3);
+          tl.to("#c-b", { opacity: 0, duration: 0.3, ease: "power2.in" }, 7.45);
+          tl.fromTo("#c-c", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 8.5);
+          tl.to("#c-c", { opacity: 0, duration: 0.3, ease: "power2.in" }, 9.649999999999999);
+          tl.fromTo("#c-d", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 10.7);
+          tl.to("#c-d", { opacity: 0, duration: 0.3, ease: "power2.in" }, 12.0);
 
-          // ---------- scene 1: boot ----------
-          tl.fromTo("#s1-logo", { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.1, ease: "power2.out" }, 0.27);
-          tl.fromTo("#s1-boot", { scaleX: 0 }, { scaleX: 1, duration: 1.6, ease: "power2.inOut" }, 0.5);
-          tl.fromTo("#s1-t", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.82);
-
-          // ---------- phone entrance ----------
-          tl.fromTo("#phone-wrap", { y: 160, scale: 0.96 }, { y: 0, scale: 1, duration: 0.8, ease: "power3.out" }, 3.01);
-
-          // ---------- screen layers (hidden until their turn) ----------
-          tl.fromTo("#l-home", { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power3.out" }, 6.3);
-          tl.fromTo("#l-loop", { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.42, ease: "expo.out", transformOrigin: "20% 40%" }, 8.72);
-          tl.fromTo("#l-chat", { opacity: 0, x: 160 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 12.58);
-          tl.fromTo("#l-st", { opacity: 0, x: 160 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 15.84);
-          tl.to("#l-lock", { opacity: 0, y: -80, duration: 0.3, ease: "power2.in" }, 6.0);
-          tl.to("#l-home", { opacity: 0, scale: 1.3, duration: 0.28, ease: "power2.in", transformOrigin: "20% 40%" }, 8.44);
-          tl.to("#l-loop", { opacity: 0, x: -120, duration: 0.28, ease: "power2.in" }, 12.3);
-          tl.to("#l-chat", { opacity: 0, x: -120, duration: 0.28, ease: "power2.in" }, 15.56);
-
-          // ---------- lock: notifications on the beat grid ----------
-          // beat-grid: notif 1 at 3.55s, 2 at 4.10s, 3 at 4.64s, 4 at 5.19s (the set then holds together)
-          [3.55, 4.1, 4.64, 5.19].forEach(function (t, i) {
-            tl.fromTo("#n" + (i + 1), { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, t - 0.03);
-          });
-
-          // ---------- home: apps arrive, finger taps Loop ----------
-          tl.fromTo("#apps .app", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", stagger: 0.04 }, 6.35);
-          tl.fromTo("#tap", { opacity: 0, scale: 1.6, x: tx, y: ty }, { opacity: 1, scale: 1, x: tx, y: ty, duration: 0.25, ease: "power2.out" }, 7.95);
-          tl.to("#tap", { scale: 0.8, duration: 0.1 }, 8.2);
-          tl.to("#app-loop .ai", { scale: 0.88, duration: 0.1 }, 8.2);
-          tl.to("#tap", { opacity: 0, duration: 0.2 }, 8.31);
-
-          // ---------- loop: like, then two swipes ----------
-          tl.fromTo("#prog", { scaleX: 0 }, { scaleX: 1, duration: 3.8, ease: "none" }, 8.73);
-          tl.fromTo("#burst", { opacity: 0, scale: 0.8 }, { opacity: 0.85, scale: 1, duration: 0.3, ease: "power2.out" }, 9.83);
-          tl.to("#burst", { opacity: 0, y: -60, duration: 0.35, ease: "power2.in" }, 10.14);
-          tl.fromTo("#heart-ic", { fill: "#f7f4f9" }, { fill: "#a97bff", duration: 0.1 }, 9.86);
-          tl.set("#likes", { textContent: "12,5 mil" }, 9.86);
-          tl.to("#feed", { y: -1258, duration: 0.45, ease: "power3.inOut" }, 10.38);
-          tl.to("#feed", { y: -2516, duration: 0.45, ease: "power3.inOut" }, 11.47);
-
-          // ---------- chat ----------
-          tl.fromTo("#m1", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 13.0);
-          tl.fromTo("#typing", { opacity: 0 }, { opacity: 1, duration: 0.15 }, 13.62);
-          tl.fromTo("#typing i", { y: 0 }, { y: -8, duration: 0.18, yoyo: true, repeat: 1, stagger: 0.09, ease: "sine.inOut" }, 13.7);
-          tl.to("#typing", { opacity: 0, duration: 0.05 }, 14.15);
-          tl.fromTo("#m2", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 14.2);
-          tl.fromTo("#m3", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 14.73);
-
-          // ---------- screen time ----------
+          // screen micro-life
+          tl.fromTo("#burst", { opacity: 0, scale: 0.8 }, { opacity: 0.85, scale: 1, duration: 0.3, ease: "power2.out" }, 6.7);
+          tl.to("#burst", { opacity: 0, y: -50, duration: 0.4, ease: "power2.in" }, 7.05);
+          tl.fromTo("#prog", { scaleX: 0.1 }, { scaleX: 0.6, duration: 2.2, ease: "none" }, 5.55);
+          tl.fromTo("#typing", { opacity: 0 }, { opacity: 0 }, 3.1);
           ["#bar1", "#bar2", "#bar3"].forEach(function (b, i) {
-            tl.fromTo(b, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "expo.out" }, 16.1 + i * 0.12);
+            tl.fromTo(b, { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "expo.out" }, 10.6 + i * 0.1);
           });
-          // beat-grid: chips at 16.93s / 17.47s / 18.01s
-          [16.93, 17.47, 18.01].forEach(function (t, i) {
-            tl.fromTo("#ch" + (i + 1), { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, t - 0.02);
+          ["#ch1", "#ch2", "#ch3"].forEach(function (c, i) {
+            tl.fromTo(c, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 10.9 + i * 0.28);
           });
 
-          // ---------- outro ----------
-          // beat-locked: 18.55s (strong cue) — logo lands
-          tl.fromTo("#s7-logo", { scale: 0.92, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.0, ease: "power2.out" }, 18.55);
-          tl.fromTo("#s7-tag", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 18.9);
-          tl.fromTo("#s7-pill", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 19.35);
-          
+          // ================= Scene 3: the motto decodes =================
+          tl.fromTo("#s3-k", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 13.0);
+          var STAGGER = 0.038, FLIP = 0.7;
+          chars.forEach(function (el, i) {
+            var st = { p: 0 };
+            tl.fromTo(st, { p: 0 }, {
+              p: 1, duration: FLIP, ease: "power3.out",
+              onUpdate: function () {
+                var t = el.dataset.t;
+                if (t !== " ") el.textContent = st.p < 0.62 ? pseudoGlyph(i * 1000 + Math.floor(st.p * 24)) : t;
+                el.style.transform = "rotateX(" + (90 - st.p * 90) + "deg)";
+                el.style.opacity = String(Math.min(1, st.p * 2));
+              }
+            }, 13.15 + i * STAGGER);
+          });
+          tl.fromTo("#s3-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "expo.out" }, 15.2);
+          // slow push-in while it holds
+          tl.fromTo("#s3-wrap", { scale: 1 }, { scale: 1.05, duration: 6.2, ease: "none", transformOrigin: "0% 50%" }, 13.1);
+          // beat-locked: 17.47s (strong cue) — chromatic glitch hits the motto, "fun" ignites
+          var copies = gsap.utils.toArray("#stackm .gcopy");
+          var amp = { a: 0 };
+          tl.set(copies, { opacity: 0 }, 12.9);
+          tl.set(copies, { opacity: 0.85 }, 17.47);
+          tl.fromTo(amp, { a: 1 }, {
+            a: 0, duration: 0.6, ease: "power3.in",
+            onUpdate: function () {
+              var step = Math.floor(tl.time() / 0.05);
+              copies.forEach(function (el, layer) {
+                var jx = (glitchHash(step * 13 + layer * 7) * 2 - 1) * 26 * amp.a;
+                var jy = (glitchHash(step * 29 + layer * 11) * 2 - 1) * 9 * amp.a;
+                el.style.transform = "translate(" + jx.toFixed(1) + "px," + jy.toFixed(1) + "px)";
+              });
+            }
+          }, 17.47);
+          tl.set(copies, { opacity: 0, x: 0, y: 0 }, 18.08);
+          tl.fromTo(funChars, { color: "#f7f4f9", textShadow: "0 0 0px rgba(169,123,255,0)" }, { color: "#a97bff", textShadow: "0 0 36px rgba(169,123,255,0.9)", duration: 0.25, ease: "power2.out" }, 17.5);
 
-          // ---------- audio-reactive: bass drives the purple glow and the logo halo ----------
+          // ================= Scene 4: logo from the dark =================
+          // beat-locked: 19.66s (strong cue)
+          tl.fromTo("#s4-bloom", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.4, ease: "power2.out" }, 19.66);
+          tl.fromTo("#s4-logo", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" }, 19.66);
+          tl.fromTo("#s4-img", { filter: "blur(18px)" }, { filter: "blur(0px)", duration: 1.0, ease: "power3.out" }, 19.66);
+          tl.fromTo("#s4-motto", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 20.1);
+          tl.fromTo("#s4-dev", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 20.6);
+
+          // ================= audio-reactive: bass breathes the void and the capsule =================
           var A = window.AUDIO_DATA;
           var glow = document.getElementById("glow-a");
-          var logos = [document.getElementById("s1-logo"), document.getElementById("s7-logo")];
+          var pill = document.getElementById("s1-pillin");
           for (var f = 0; f < A.bass.length; f++) {
-            tl.call(
-              (function (b) {
-                return function () {
-                  var e = Math.min(1, b * 2.2);
-                  glow.style.opacity = String(0.8 + 0.2 * e);
-                  glow.style.scale = String(1 + 0.04 * e);
-                  var sh = "0 0 " + (90 + 30 * e).toFixed(0) + "px " + (4 + 6 * e).toFixed(0) + "px rgba(131, 53, 241, " + (0.3 + 0.15 * e).toFixed(3) + ")";
-                  logos[0].style.boxShadow = sh;
-                  logos[1].style.boxShadow = sh;
-                };
-              })(A.bass[f]),
-              [],
-              f / A.fps
-            );
+            tl.call((function (b) {
+              return function () {
+                var e = Math.min(1, b * 2.2);
+                glow.style.opacity = String(0.55 + 0.35 * e);
+                glow.style.scale = String(1 + 0.06 * e);
+                pill.style.boxShadow = "0 0 " + (50 + 60 * e).toFixed(0) + "px " + (4 + 10 * e).toFixed(0) + "px rgba(131, 53, 241, " + (0.4 + 0.4 * e).toFixed(3) + ")";
+              };
+            })(A.bass[f]), [], f / A.fps);
           }
 
           window.__timelines["main"] = tl;
           if (window.__hfForceTimelineRebind) window.__hfForceTimelineRebind();
         }
-
         document.fonts.ready.then(build);
       })();
     </script>

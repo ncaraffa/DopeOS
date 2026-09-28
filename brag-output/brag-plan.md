@@ -59,3 +59,17 @@ E se o celular fosse o jogo? DopeOS: um sistema operacional fictício com feed i
 7. Outro — 18.55–22.4 — logo, tagline, "Em desenvolvimento · Android".
 
 Nota de privacidade: nomes, horários e números são ilustrativos da interface do jogo; nenhum dado real.
+
+---
+
+## Revisão 3 — corte misterioso (substitui o storyboard acima)
+
+Pedido: mais misterioso, animação com movimento de câmera de verdade, exaltar o lema "Welcome to a more fun version of the world."
+
+- Tom: cinematic / misterioso — quase preto (#07030f), roxo só como luz, grão e vinheta.
+- Técnicas (hyperframes-animation): `3d-camera-flight` (lente de perspectiva fixa, um único objeto de câmera, pousos em power4.out e voos em power3.inOut), `depth-of-field-blur` (troca de foco entre as telas), `hacker-flip-3d` (o lema se decifra letra a letra), `chromatic-glitch` (glitch RGB travado na batida forte de 17.47s).
+- 0–3.3 Sinal: cápsula acende no escuro, "SINAL DETECTADO", câmera mergulha na cápsula.
+- 3.1–12.9 Voo 3D entre as telas flutuando sobre um piso em grade: "Um sistema inteiro." → "Um feed que não termina." → "Alguém lembra de você." → "E tudo aprende com você."; recua para o vazio e escurece.
+- 12.9–19.66 O lema se decifra em 4 linhas; glitch em 17.47s; "fun" acende em roxo.
+- 19.66–23 Logo surge do escuro (beat-locked 19.66s) com o lema embaixo.
+- Música: vol-12 a 0.26, fade-in e fade-out; SFX mínimos (glitch, deslizes, teclas baixas, sino grave no logo).
