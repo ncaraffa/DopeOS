@@ -73,3 +73,22 @@ Pedido: mais misterioso, animação com movimento de câmera de verdade, exaltar
 - 12.9–19.66 O lema se decifra em 4 linhas; glitch em 17.47s; "fun" acende em roxo.
 - 19.66–23 Logo surge do escuro (beat-locked 19.66s) com o lema embaixo.
 - Música: vol-12 a 0.26, fade-in e fade-out; SFX mínimos (glitch, deslizes, teclas baixas, sino grave no logo).
+
+---
+
+## Revisão 4 — estilo do pin de referência (substitui a revisão 3)
+
+Pedido: refazer no estilo do pin https://br.pinterest.com/pin/774124931963319/ (reel de motion design com tipografia animada), mantendo o lema "Welcome to a more fun version of the world." no final e o "fun" acendendo em roxo alguns segundos depois.
+
+- Linguagem visual do pin: serifa itálica (Playfair Display 400/700/900 italic), rótulo em caixa roxa (Oswald), fundos alternando branco / roxo vivo #7209b7 / creme / lavanda, grade sutil, palavra-fantasma gigante atravessando o fundo, estrelas brancas nos cantos, objetos "recortados" com sombra, cursor roxo, palavras entrando com blur, cortes secos na batida.
+- Objetos (feitos em CSS/SVG, sem imagens externas): a cápsula do DopeOS, o celular na tela de bloqueio, cards do feed Loop, balão de chat da Luna, um olho que observa, o gráfico neon do Screen Time.
+- Cortes a cada 4 batidas (~110 BPM, 1ª batida em 0.28s):
+  1. 0–2.46 "JÁ PENSOU NISSO?" / "E se o celular fosse o jogo?" — cursor clica na cápsula.
+  2. 2.46–4.64 roxo: "não é um app. Sistema inteiro." — celular sobe, 3 notificações.
+  3. 4.64–6.83 "Loop" vertical + "um feed que nunca acaba." — feed rola, coração.
+  4. 6.83–9.01 creme: "Personagens com memória" — Luna digita e lembra do vídeo curtido.
+  5. 9.01–11.19 roxo: "O algoritmo observa cada toque e aprende." — olho procurando.
+  6. 11.19–13.37 lavanda: "Screen Time sem segredos" — linha neon + contador; "a sua atenção move o mundo".
+  7. 13.37–15.55 "não é só distração." / faixa roxa "é um mundo inteiro." — cápsula sobe.
+  8. 15.55–23 o lema, palavra por palavra na batida; em 19.66s (cue forte) o "fun" acende em roxo com brilho, estrela e fantasma "fun" tingido; logo + "Em desenvolvimento · Android" em 20.5s. O lema fica na tela até o fim.
+- Música: vol-12 a ~0.3–0.34, fade-out no último 1.4s. SFX: clique, deslizes nos cortes, notificações, digitação, "plin" de vidro no "fun", sino no logo.

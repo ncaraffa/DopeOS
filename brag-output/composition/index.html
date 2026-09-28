@@ -7,548 +7,475 @@
     <script src="assets/vendor/gsap.min.js"></script>
     <script src="assets/audio-data.js"></script>
     <style>
-      @font-face { font-family: "Space Grotesk"; font-weight: 500; src: url("assets/fonts/space-grotesk-latin-500-normal.woff2") format("woff2"); }
-      @font-face { font-family: "Space Grotesk"; font-weight: 700; src: url("assets/fonts/space-grotesk-latin-700-normal.woff2") format("woff2"); }
-      @font-face { font-family: "Inter"; font-weight: 400; src: url("assets/fonts/inter-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Playfair"; font-style: italic; font-weight: 400; src: url("assets/fonts/playfair-display-latin-400-italic.woff2") format("woff2"); }
+      @font-face { font-family: "Playfair"; font-style: italic; font-weight: 700; src: url("assets/fonts/playfair-display-latin-700-italic.woff2") format("woff2"); }
+      @font-face { font-family: "Playfair"; font-style: italic; font-weight: 900; src: url("assets/fonts/playfair-display-latin-900-italic.woff2") format("woff2"); }
+      @font-face { font-family: "Playfair"; font-style: normal; font-weight: 400; src: url("assets/fonts/playfair-display-latin-400-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Oswald"; font-weight: 600; src: url("assets/fonts/oswald-latin-600-normal.woff2") format("woff2"); }
       @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/fonts/inter-latin-500-normal.woff2") format("woff2"); }
       @font-face { font-family: "Inter"; font-weight: 600; src: url("assets/fonts/inter-latin-600-normal.woff2") format("woff2"); }
       @font-face { font-family: "Inter"; font-weight: 700; src: url("assets/fonts/inter-latin-700-normal.woff2") format("woff2"); }
-      @font-face { font-family: "Inter"; font-weight: 800; src: url("assets/fonts/inter-latin-800-normal.woff2") format("woff2"); }
+      @font-face { font-family: "Space Grotesk"; font-weight: 700; src: url("assets/fonts/space-grotesk-latin-700-normal.woff2") format("woff2"); }
 
       :root {
-        --bg: #100629; --purple: #8335f1; --purple-lite: #a97bff; --lavender: #e7e1f3; --white: #f7f4f9;
-        --muted: #b9acd6; --line: #3a2170;
-        --display: "Space Grotesk", system-ui, sans-serif;
+        --white: #ffffff; --ink: #16101f; --purple: #7209b7; --purple-2: #8335f1; --lilac: #d9c6ff;
+        --cream: #f3efe6; --ghost: rgba(22, 16, 31, 0.08);
+        --serif: "Playfair", Georgia, serif;
         --sans: "Inter", system-ui, sans-serif;
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
-      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #100629; }
-      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg); font-family: var(--sans); color: var(--white); }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #fff; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #fff; font-family: var(--serif); color: var(--ink); }
 
-      /* ---------- background ---------- */
-      #bg { position: absolute; inset: 0; }
-      .glow-a { position: absolute; width: 1400px; height: 1400px; left: -160px; top: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(131, 53, 241, 0.26), rgba(131, 53, 241, 0) 62%); }
-      .glow-b { position: absolute; width: 1000px; height: 1000px; right: -520px; top: -420px; border-radius: 50%; background: radial-gradient(circle, rgba(169, 123, 255, 0.14), rgba(169, 123, 255, 0) 62%); }
-      .scan { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, rgba(231, 225, 243, 0.05) 0 2px, transparent 2px 6px); }
-      .grid-lines { position: absolute; inset: -60px; background-image: linear-gradient(rgba(169, 123, 255, 0.06) 2px, transparent 2px), linear-gradient(90deg, rgba(169, 123, 255, 0.06) 2px, transparent 2px); background-size: 120px 120px; }
-
-      .scene { position: absolute; inset: 0; }
+      .scene { position: absolute; inset: 0; overflow: hidden; }
       .in { position: absolute; inset: 0; }
+      .bg-white { background: #fff; }
+      .bg-purple { background: var(--purple); color: #fff; }
+      .bg-cream { background: var(--cream); }
+      .grid { position: absolute; inset: -80px; background-image: linear-gradient(rgba(22, 16, 31, 0.05) 2px, transparent 2px), linear-gradient(90deg, rgba(22, 16, 31, 0.05) 2px, transparent 2px); background-size: 96px 96px; }
+      .bg-purple .grid { background-image: linear-gradient(rgba(255, 255, 255, 0.08) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 255, 255, 0.08) 2px, transparent 2px); }
 
-      /* ---------- scene 1: boot ---------- */
-      #s1 .col { position: absolute; left: 0; right: 0; top: 520px; display: flex; flex-direction: column; align-items: center; }
-      #s1 .logo { width: 440px; height: 440px; border-radius: 96px; box-shadow: 0 0 120px 10px rgba(131, 53, 241, 0.55); }
-      #s1 .logo img { width: 100%; height: 100%; display: block; border-radius: 96px; }
-      #s1 .boot { margin-top: 90px; width: 520px; height: 12px; border-radius: 12px; background: rgba(231, 225, 243, 0.14); overflow: hidden; }
-      #s1 .boot i { display: block; width: 100%; height: 100%; background: linear-gradient(90deg, #8335f1, #d9c6ff); transform-origin: left center; }
-      #s1 .t { margin-top: 90px; font-family: var(--display); font-weight: 700; font-size: 96px; letter-spacing: -0.03em; }
+      .i { font-style: italic; }
+      .w4 { font-weight: 400; } .w7 { font-weight: 700; } .w9 { font-weight: 900; }
+      .pu { color: var(--purple); }
+      .line { display: block; white-space: nowrap; }
+      .word { display: inline-block; will-change: transform, filter, opacity; }
+      .ghost { position: absolute; white-space: nowrap; font-style: italic; font-weight: 900; color: var(--ghost); line-height: 0.9; }
+      .bg-purple .ghost { color: rgba(255, 255, 255, 0.09); }
 
-      /* ---------- captions (scenes 2-6) ---------- */
-      .cap { position: absolute; left: 80px; top: 150px; width: 920px; }
-      .cap .lbl { font-family: var(--display); font-weight: 500; font-size: 30px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--purple-lite); }
-      .cap h2 { margin-top: 18px; font-family: var(--display); font-weight: 700; font-size: 82px; line-height: 1.02; letter-spacing: -0.035em; }
-      .cap h2 em { font-style: normal; color: var(--purple-lite); }
+      .burst { position: absolute; width: 520px; height: 520px; }
+      .burst svg { width: 100%; height: 100%; display: block; }
 
-      /* ---------- phone ---------- */
-      #phone-wrap { position: absolute; left: 190px; top: 490px; width: 700px; height: 1290px; }
-      .phone { position: absolute; inset: 0; border-radius: 92px; background: #05020d; padding: 16px; box-shadow: 0 0 0 3px #2c1a55, 0 40px 120px -30px rgba(0, 0, 0, 0.8); }
-      .screen { position: relative; width: 100%; height: 100%; border-radius: 78px; overflow: hidden; background: #1a0a40; }
-      .island { position: absolute; left: 50%; top: 22px; width: 170px; height: 46px; margin-left: -85px; border-radius: 30px; background: #05020d; z-index: 20; }
-      .sbar { position: absolute; left: 0; right: 0; top: 0; height: 90px; display: flex; align-items: center; justify-content: space-between; padding: 0 62px; font-size: 26px; font-weight: 700; z-index: 19; }
-      .sbar .ic { display: flex; gap: 10px; align-items: center; }
-      .sbar .ic b { display: block; width: 44px; height: 22px; border-radius: 7px; border: 3px solid var(--white); position: relative; }
-      .sbar .ic b::after { content: ""; position: absolute; left: 3px; top: 3px; bottom: 3px; width: 26px; border-radius: 3px; background: var(--white); }
-      .layer { position: absolute; inset: 0; }
-      #l-home, #l-loop, #l-chat, #l-st { opacity: 0; }
-      .wall { position: absolute; inset: 0; background: radial-gradient(120% 70% at 30% 15%, #3b1590 0%, #1d0a4d 45%, #0d0424 100%); }
+      .cursor { position: absolute; width: 96px; height: 120px; z-index: 30; }
+      .cursor svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25)); }
 
-      /* lock */
-      .clock { position: absolute; left: 0; right: 0; top: 150px; text-align: center; font-family: var(--display); font-weight: 700; font-size: 168px; letter-spacing: -0.04em; line-height: 1; }
-      .date { position: absolute; left: 0; right: 0; top: 356px; text-align: center; font-size: 30px; font-weight: 500; color: var(--lavender); }
-      .notifs { position: absolute; left: 30px; right: 30px; top: 440px; display: flex; flex-direction: column; gap: 16px; }
-      .notif { display: flex; gap: 18px; padding: 22px 24px; border-radius: 30px; background: rgba(247, 244, 249, 0.16); border: 2px solid rgba(247, 244, 249, 0.18); }
-      .notif .ai { width: 64px; height: 64px; flex: none; border-radius: 17px; display: flex; align-items: center; justify-content: center; }
-      .notif .ai svg { width: 38px; height: 38px; }
-      .notif .top { display: flex; justify-content: space-between; font-size: 22px; font-weight: 700; color: var(--lavender); text-transform: uppercase; letter-spacing: 0.06em; }
-      .notif .top span:last-child { font-weight: 500; text-transform: none; letter-spacing: 0; }
-      .notif p { margin-top: 6px; font-size: 27px; line-height: 1.3; font-weight: 500; }
-      .notif .body { flex: 1; }
+      /* ---------- the capsule (brand object) ---------- */
+      .capwrap { position: absolute; width: 600px; height: 600px; }
+      .capshadow { position: absolute; left: 110px; right: 110px; bottom: 60px; height: 60px; border-radius: 50%; background: radial-gradient(closest-side, rgba(40, 10, 80, 0.35), rgba(40, 10, 80, 0)); }
+      .cap { position: absolute; left: 40px; top: 190px; width: 520px; height: 210px; display: flex; transform: rotate(-35deg); filter: drop-shadow(0 30px 40px rgba(60, 10, 120, 0.35)); }
+      .cap .a { width: 50%; height: 100%; border-radius: 105px 0 0 105px; background: linear-gradient(180deg, #c49bff 0%, #8a3cf5 42%, #5a16c9 78%, #3c0b8f 100%); }
+      .cap .b { width: 50%; height: 100%; border-radius: 0 105px 105px 0; background: linear-gradient(180deg, #ffffff 0%, #f1ecfa 45%, #cfc2e6 82%, #a897c8 100%); }
+      .cap .seam { position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; margin-left: -3px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(60, 20, 120, 0.35)); }
+      .cap .hl { position: absolute; left: 40px; right: 40px; top: 22px; height: 46px; border-radius: 40px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0)); }
 
-      /* app icon colors */
-      .c-loop { background: #24104f; border: 2px solid #3a2170; }
-      .c-chat { background: #24104f; border: 2px solid #3a2170; }
-      .c-loja { background: #24104f; border: 2px solid #3a2170; }
-      .c-st { background: #24104f; border: 2px solid #3a2170; }
-      .c-gal { background: #24104f; border: 2px solid #3a2170; }
-      .c-cfg { background: #24104f; border: 2px solid #3a2170; }
-      .c-sty { background: #24104f; border: 2px solid #3a2170; }
-      .c-wal { background: #24104f; border: 2px solid #3a2170; }
+      /* ---------- label box ---------- */
+      .lbl { display: inline-block; padding: 10px 26px 14px; background: var(--purple); color: #fff; font-family: "Oswald", sans-serif; font-weight: 600; font-size: 84px; letter-spacing: 0.01em; text-transform: uppercase; line-height: 1; }
 
-      /* home */
-      .widget { position: absolute; left: 44px; right: 44px; top: 130px; height: 190px; border-radius: 40px; background: rgba(247, 244, 249, 0.14); border: 2px solid rgba(247, 244, 249, 0.18); padding: 30px 36px; }
-      .widget .k { font-size: 24px; font-weight: 600; color: var(--lavender); text-transform: uppercase; letter-spacing: 0.08em; }
-      .widget .v { margin-top: 10px; font-family: var(--display); font-weight: 700; font-size: 64px; letter-spacing: -0.02em; }
-      .widget .v small { font-size: 32px; font-weight: 500; color: var(--lavender); }
-      .apps { position: absolute; left: 44px; right: 44px; top: 380px; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 40px; }
-      .app { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-      .app .ai { width: 118px; height: 118px; border-radius: 32px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.6); }
-      .app .ai svg { width: 62px; height: 62px; }
-      .app span { font-size: 23px; font-weight: 600; }
-      .dock { position: absolute; left: 40px; right: 40px; bottom: 44px; height: 170px; border-radius: 50px; background: rgba(247, 244, 249, 0.16); display: flex; align-items: center; justify-content: space-around; }
-      .dock .ai { width: 112px; height: 112px; border-radius: 30px; display: flex; align-items: center; justify-content: center; }
-      .dock .ai svg { width: 58px; height: 58px; }
-      .tap { position: absolute; left: 0; top: 0; width: 130px; height: 130px; border-radius: 50%; border: 6px solid rgba(247, 244, 249, 0.9); background: rgba(247, 244, 249, 0.2); }
+      /* ---------- scene 1 ---------- */
+      #s1 .head { position: absolute; left: 0; right: 0; top: 330px; text-align: center; }
+      #s1 .t1 { margin-top: 40px; font-size: 128px; line-height: 1; }
+      #s1 .t2 { font-size: 128px; line-height: 1.02; }
+      #s1-ghost { left: -40px; top: 1060px; font-size: 520px; }
+      #s1-cap { left: 240px; top: 980px; }
 
-      /* loop */
-      .feed { position: absolute; left: 0; top: 0; width: 100%; }
-      .vid { position: relative; width: 668px; height: 1258px; overflow: hidden; }
-      .vid svg.scene-art { position: absolute; inset: 0; width: 100%; height: 100%; }
-      .vid .shade { position: absolute; left: 0; right: 0; bottom: 0; height: 520px; background: linear-gradient(0deg, rgba(10, 3, 26, 0.92), rgba(10, 3, 26, 0)); }
-      .loop-top { position: absolute; left: 0; right: 0; top: 96px; display: flex; justify-content: center; gap: 40px; font-size: 28px; font-weight: 700; z-index: 5; }
-      .loop-top span { color: var(--lavender); }
-      .loop-top span.on { color: var(--white); border-bottom: 4px solid var(--white); padding-bottom: 6px; }
-      .rail { position: absolute; right: 26px; bottom: 250px; display: flex; flex-direction: column; gap: 34px; align-items: center; z-index: 5; }
-      .rail .it { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 22px; font-weight: 700; }
-      .rail svg { width: 64px; height: 64px; display: block; }
-      .meta { position: absolute; left: 36px; right: 130px; bottom: 90px; }
-      .meta b { font-size: 30px; }
-      .meta p { margin-top: 10px; font-size: 27px; line-height: 1.35; color: var(--lavender); }
-      .heart-burst { position: absolute; left: 234px; top: 480px; width: 200px; height: 200px; z-index: 6; }
-      .heart-burst svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 10px 30px rgba(255, 77, 141, 0.7)); }
-      .progress { position: absolute; left: 0; right: 0; bottom: 30px; height: 6px; background: rgba(247, 244, 249, 0.25); z-index: 5; }
-      .progress i { display: block; height: 100%; width: 100%; background: var(--white); transform-origin: left center; }
+      /* ---------- scene 2: phone ---------- */
+      #s2 .head { position: absolute; left: 90px; top: 260px; }
+      #s2 .k { font-size: 70px; line-height: 1; opacity: 0.85; }
+      #s2 .t1 { font-size: 170px; line-height: 1; margin-top: 10px; }
+      #s2 .t2 { font-size: 110px; line-height: 1; margin-left: 180px; color: var(--lilac); }
+      #s2-ghost { left: 60px; top: 1320px; font-size: 360px; }
+      .phone { position: absolute; left: 290px; top: 880px; width: 520px; height: 1060px; border-radius: 84px; background: #0d0718; padding: 16px; box-shadow: 0 0 0 4px #2b1b47, 0 60px 90px -20px rgba(20, 0, 50, 0.6); }
+      .phone .scr { position: relative; width: 100%; height: 100%; border-radius: 70px; overflow: hidden; background: radial-gradient(120% 70% at 30% 15%, #9b5cff 0%, #5a16c9 45%, #1d0a4d 100%); color: #fff; font-family: var(--sans); }
+      .phone .isl { position: absolute; left: 50%; top: 20px; width: 150px; height: 42px; margin-left: -75px; border-radius: 30px; background: #0d0718; }
+      .phone .clk { position: absolute; left: 0; right: 0; top: 110px; text-align: center; font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 150px; letter-spacing: -0.04em; line-height: 1; }
+      .phone .dt { position: absolute; left: 0; right: 0; top: 272px; text-align: center; font-size: 28px; font-weight: 500; opacity: 0.85; }
+      .phone .nts { position: absolute; left: 26px; right: 26px; top: 350px; display: flex; flex-direction: column; gap: 14px; }
+      .nt { padding: 20px 22px; border-radius: 28px; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.22); }
+      .nt b { display: block; font-size: 20px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
+      .nt span { display: block; margin-top: 6px; font-size: 26px; font-weight: 600; line-height: 1.25; }
 
-      /* chat */
-      .chat-bg { position: absolute; inset: 0; background: #120733; }
-      .chat-head { position: absolute; left: 0; right: 0; top: 90px; height: 130px; display: flex; align-items: center; gap: 22px; padding: 0 40px; border-bottom: 2px solid var(--line); }
-      .avatar { width: 84px; height: 84px; border-radius: 50%; background: linear-gradient(150deg, #ffb3d9, #a97bff); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 700; font-size: 38px; color: #2a0c6b; }
-      .chat-head b { font-size: 34px; display: block; }
-      .chat-head small { font-size: 24px; color: #7ee2b8; font-weight: 600; }
-      .msgs { position: absolute; left: 34px; right: 34px; top: 270px; display: flex; flex-direction: column; gap: 22px; }
-      .bub { max-width: 500px; padding: 24px 30px; border-radius: 36px; font-size: 32px; line-height: 1.32; font-weight: 500; }
-      .bub.them { align-self: flex-start; background: #2c1570; border-bottom-left-radius: 10px; }
-      .bub.me { align-self: flex-end; background: #6d28d9; border-bottom-right-radius: 10px; }
-      .typing { position: absolute; left: 34px; top: 440px; display: flex; gap: 10px; padding: 26px 30px; border-radius: 36px; background: #2c1570; }
-      .typing i { display: block; width: 16px; height: 16px; border-radius: 50%; background: var(--lavender); }
-      .composer { position: absolute; left: 30px; right: 30px; bottom: 44px; height: 96px; border-radius: 48px; border: 2px solid var(--line); display: flex; align-items: center; padding: 0 34px; font-size: 28px; color: var(--muted); }
+      /* ---------- scene 3: loop ---------- */
+      #s3-big { position: absolute; left: 70px; top: 1560px; transform-origin: 0 0; transform: rotate(-90deg); font-size: 330px; line-height: 0.8; font-weight: 900; }
+      #s3-small { position: absolute; left: 330px; top: 1500px; transform-origin: 0 0; transform: rotate(-90deg); font-size: 96px; line-height: 1; }
+      #s3 .sub { position: absolute; left: 470px; top: 250px; width: 560px; font-size: 92px; line-height: 1; }
+      .feed-win { position: absolute; left: 520px; top: 560px; width: 440px; height: 1200px; overflow: hidden; border-radius: 48px; }
+      .feed { position: absolute; left: 0; top: 0; width: 100%; display: flex; flex-direction: column; gap: 24px; }
+      .vc { position: relative; width: 440px; height: 700px; border-radius: 44px; overflow: hidden; flex: none; box-shadow: 0 30px 50px -20px rgba(40, 10, 80, 0.45); }
+      .vc .art { position: absolute; inset: 0; }
+      .vc .meta { position: absolute; left: 30px; right: 90px; bottom: 36px; color: #fff; font-family: var(--sans); }
+      .vc .meta b { font-size: 26px; font-weight: 700; }
+      .vc .meta i { display: block; margin-top: 12px; height: 14px; border-radius: 10px; background: rgba(255, 255, 255, 0.5); }
+      .vc .meta i + i { width: 60%; }
+      .vc .rail { position: absolute; right: 24px; bottom: 60px; display: flex; flex-direction: column; gap: 26px; }
+      .vc .rail span { display: block; width: 44px; height: 44px; border-radius: 50%; background: rgba(255, 255, 255, 0.85); }
+      .heart { position: absolute; left: 640px; top: 1000px; width: 200px; height: 200px; z-index: 5; }
+      .heart svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 16px 30px rgba(114, 9, 183, 0.5)); }
 
-      /* screen time */
-      .st-bg { position: absolute; inset: 0; background: #120733; }
-      .st { position: absolute; left: 44px; right: 44px; top: 110px; }
-      .st .h { font-family: var(--display); font-weight: 700; font-size: 50px; }
-      .st .k { margin-top: 28px; font-size: 24px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-      .st .total { margin-top: 14px; font-family: var(--display); font-weight: 700; font-size: 104px; letter-spacing: -0.03em; line-height: 1.1; }
-      .bars { margin-top: 30px; display: flex; flex-direction: column; gap: 22px; }
-      .bar-row .top { display: flex; justify-content: space-between; font-size: 27px; font-weight: 600; }
-      .bar-row .top span:last-child { color: var(--lavender); font-weight: 500; }
-      .track { margin-top: 10px; height: 22px; border-radius: 22px; background: rgba(247, 244, 249, 0.1); }
-      .track i { display: block; height: 100%; border-radius: 22px; transform-origin: left center; }
-      .learned { margin-top: 50px; padding: 30px; border-radius: 36px; background: #22105a; border: 2px solid var(--line); }
-      .learned .k2 { font-size: 26px; font-weight: 700; color: var(--purple-lite); }
-      .chips { margin-top: 20px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
-      .chip { padding: 14px 24px; border-radius: 999px; background: rgba(169, 123, 255, 0.2); border: 2px solid rgba(169, 123, 255, 0.5); font-size: 27px; font-weight: 600; }
+      /* ---------- scene 4: chat ---------- */
+      #s4 .head { position: absolute; left: 0; right: 0; top: 250px; text-align: center; }
+      #s4 .t1 { font-size: 150px; line-height: 1; }
+      #s4 .t2 { font-size: 84px; line-height: 1.1; }
+      #s4 .t3 { font-size: 150px; line-height: 1; }
+      #s4-ghost { left: -30px; top: 1450px; font-size: 380px; }
+      .bubble { position: absolute; left: 140px; top: 860px; width: 800px; padding: 60px 64px 70px; border-radius: 90px 90px 90px 20px; background: linear-gradient(170deg, #b27cff 0%, #7a2ff0 48%, #4f12b0 100%); color: #fff; box-shadow: 0 50px 80px -30px rgba(60, 10, 120, 0.55), inset 0 6px 0 rgba(255, 255, 255, 0.35); }
+      .bubble .who { display: flex; align-items: center; gap: 22px; font-family: var(--sans); font-weight: 700; font-size: 34px; }
+      .bubble .who i { width: 76px; height: 76px; border-radius: 50%; background: linear-gradient(150deg, #ffd1ea, #d9c6ff); display: block; }
+      .bubble .who small { display: block; font-weight: 600; font-size: 24px; color: #d8ffec; }
+      .bubble .msg { position: relative; margin-top: 36px; height: 230px; }
+      .dots { position: absolute; left: 0; top: 40px; display: flex; gap: 18px; }
+      .dots i { display: block; width: 30px; height: 30px; border-radius: 50%; background: #fff; }
+      .bubble .txt { position: absolute; left: 0; top: 0; font-family: var(--serif); font-style: italic; font-weight: 700; font-size: 64px; line-height: 1.12; }
 
-      /* ---------- scene 7: outro ---------- */
-      #s7 .col { position: absolute; left: 0; right: 0; top: 420px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-      #s7 .logo { width: 380px; height: 380px; border-radius: 84px; box-shadow: 0 0 140px 20px rgba(131, 53, 241, 0.55); }
-      #s7 .logo img { width: 100%; height: 100%; display: block; border-radius: 84px; }
-      #s7 .tag { margin-top: 90px; font-family: var(--display); font-weight: 700; font-size: 84px; line-height: 1.05; letter-spacing: -0.035em; width: 960px; }
-      #s7 .tag em { font-style: normal; color: var(--purple-lite); display: block; }
-      #s7 .pill { margin-top: 70px; padding: 18px 34px; border-radius: 999px; border: 2px solid rgba(169, 123, 255, 0.6); background: rgba(131, 53, 241, 0.22); font-size: 32px; font-weight: 600; }
-      #s7 .motto { margin-top: 44px; font-size: 32px; font-style: italic; color: var(--muted); }
-    
-      @font-face { font-family: "JetBrains Mono"; font-weight: 500; src: url("assets/fonts/jetbrains-mono-latin-500-normal.woff2") format("woff2"); }
-      @font-face { font-family: "JetBrains Mono"; font-weight: 600; src: url("assets/fonts/jetbrains-mono-latin-600-normal.woff2") format("woff2"); }
-      /* ============ MYSTERY CUT ============ */
-      html, body, #root { background: #07030f; }
-      .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
-      #l-home, #l-loop, #l-chat, #l-st { opacity: 1; }
-      .bg-void { position: absolute; inset: 0; background: radial-gradient(80% 50% at 50% 45%, #1a0b3d 0%, #0b0520 55%, #07030f 100%); }
-      .grain { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, rgba(231,225,243,0.035) 0 2px, transparent 2px 5px); }
-      .vignette { position: absolute; inset: 0; background: radial-gradient(100% 70% at 50% 50%, rgba(7,3,15,0) 45%, rgba(7,3,15,0.85) 100%); }
+      /* ---------- scene 5: eye ---------- */
+      #s5 .k { position: absolute; left: 110px; top: 360px; font-size: 80px; }
+      #s5 .big { position: absolute; left: 0; right: 0; top: 440px; text-align: center; font-size: 230px; line-height: 1; font-weight: 900; }
+      #s5 .t2 { position: absolute; left: 0; right: 0; top: 1370px; text-align: center; font-size: 120px; line-height: 1; }
+      #s5 .t3 { position: absolute; right: 120px; top: 1500px; font-size: 72px; line-height: 1; color: var(--lilac); }
+      .eye { position: absolute; left: 330px; top: 800px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle at 36% 30%, #ffffff 0%, #f6f2fb 38%, #ddd3ea 66%, #9e8fb8 100%); box-shadow: 0 50px 80px -20px rgba(20, 0, 50, 0.55); overflow: hidden; }
+      .iris { position: absolute; left: 110px; top: 110px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 0, 0, 0) 55%, rgba(30, 5, 60, 0.75) 100%), repeating-conic-gradient(from 0deg, #6a24d6 0deg 5deg, #a06bff 5deg 9deg, #4c11a8 9deg 13deg); }
+      .pupil { position: absolute; left: 60px; top: 60px; width: 80px; height: 80px; border-radius: 50%; background: #0b0614; }
+      .glint { position: absolute; left: 58px; top: 40px; width: 40px; height: 30px; border-radius: 50%; background: rgba(255, 255, 255, 0.9); }
 
-      /* scene 1: signal */
-      #s1 .pill { position: absolute; left: 390px; top: 820px; width: 300px; height: 120px; }
-      #s1 .pill-in { width: 100%; height: 100%; border-radius: 60px; overflow: hidden; display: flex; box-shadow: 0 0 60px 6px rgba(131, 53, 241, 0.5); }
-      #s1 .pill-in i { display: block; flex: 1; }
-      #s1 .pill-in i:first-child { background: linear-gradient(160deg, #a97bff, #5b21b6); }
-      #s1 .pill-in i:last-child { background: linear-gradient(160deg, #ffffff, #d9cff0); }
-      #s1 .sig { position: absolute; left: 0; right: 0; top: 1160px; text-align: center; font-size: 30px; font-weight: 500; letter-spacing: 0.3em; color: #b9acd6; }
-      #s1 .line { position: absolute; left: 140px; right: 140px; top: 1110px; height: 2px; background: linear-gradient(90deg, rgba(169,123,255,0), #a97bff, rgba(169,123,255,0)); transform-origin: center; }
+      /* ---------- scene 6: chart ---------- */
+      #s6 { background: #e6dbfa; }
+      #s6 .head { position: absolute; left: 0; right: 0; top: 190px; text-align: center; }
+      #s6 .t1 { font-size: 130px; line-height: 1; }
+      #s6 .t2 { font-size: 92px; line-height: 1; }
+      .chart { position: absolute; left: 190px; top: 520px; width: 700px; height: 1080px; border-radius: 12px; overflow: hidden; background: radial-gradient(120% 80% at 50% 30%, #1d0f45 0%, #07031a 70%); box-shadow: 0 60px 90px -30px rgba(20, 0, 60, 0.7); }
+      .chart svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .chart .lab { position: absolute; left: 44px; top: 44px; color: #fff; font-family: var(--sans); }
+      .chart .lab b { display: block; font-size: 24px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #bfa4ff; }
+      .chart .lab span { display: block; margin-top: 10px; font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 84px; letter-spacing: -0.03em; }
+      #s6 .cap2 { position: absolute; left: 0; right: 0; top: 1680px; text-align: center; font-size: 60px; }
 
-      /* scene 2: 3D world */
-      #s2 { overflow: hidden; }
-      .stage { position: absolute; inset: 0; perspective: 1000px; }
-      .world { position: absolute; inset: 0; transform-style: preserve-3d; transform-origin: 50% 50%; will-change: transform; }
-      .floor { position: absolute; left: -2460px; top: 1740px; width: 6000px; height: 7000px; transform-origin: 50% 0%; transform: rotateX(90deg);
-        background-image: linear-gradient(rgba(169,123,255,0.22) 3px, transparent 3px), linear-gradient(90deg, rgba(169,123,255,0.22) 3px, transparent 3px); background-size: 200px 200px; }
-      .card3d { position: absolute; left: 238px; top: 331px; width: 604px; height: 1134px; transform-style: preserve-3d; }
-      .card-in { position: absolute; inset: 0; border-radius: 70px; overflow: hidden; background: #05020d; padding: 14px; box-shadow: 0 0 0 3px #3a2170, 0 0 120px -20px rgba(131,53,241,0.55); --dof: 0px; filter: blur(var(--dof)); will-change: filter; }
-      .scr { position: relative; width: 668px; height: 1258px; transform: scale(0.8625); transform-origin: 0 0; border-radius: 64px; overflow: hidden; background: #1a0a40; }
-      #ca { transform: translate3d(0px, 0px, 0px) rotateY(-10deg); }
-      #cb { transform: translate3d(980px, -120px, -700px) rotateY(12deg); }
-      #cc { transform: translate3d(-960px, 80px, -1400px) rotateY(-12deg); }
-      #cd { transform: translate3d(120px, -60px, -2150px) rotateY(6deg); }
-      .dust { position: absolute; display: block; border-radius: 50%; background: #c9b6f2; opacity: 0.55; box-shadow: 0 0 12px 2px rgba(169,123,255,0.6); }
-      .blackout { position: absolute; inset: 0; background: #07030f; }
-      .cap2 { position: absolute; left: 80px; right: 80px; top: 120px; }
-      .cap2 .k { font-size: 26px; font-weight: 500; letter-spacing: 0.28em; color: #a97bff; text-transform: uppercase; }
-      .cap2 h2 { margin-top: 14px; font-family: var(--display); font-weight: 700; font-size: 74px; line-height: 1.04; letter-spacing: -0.03em; color: #f7f4f9; }
-      .cap2 h2 em { font-style: normal; color: #a97bff; }
+      /* ---------- scene 7: not a distraction ---------- */
+      #s7 .band { position: absolute; left: 0; right: 0; top: 1000px; bottom: 0; background: var(--purple); }
+      #s7 .head { position: absolute; left: 0; right: 0; top: 330px; text-align: center; }
+      #s7 .t1 { font-size: 110px; line-height: 1; }
+      #s7 .t2 { font-size: 190px; line-height: 1.02; }
+      #s7 .t3 { position: absolute; left: 0; right: 0; top: 1460px; text-align: center; font-size: 110px; line-height: 1.05; color: #fff; }
+      #s7-cap { left: 240px; top: 620px; }
 
-      /* scene 3: the motto */
-      #s3 .wrap { position: absolute; left: 100px; right: 60px; top: 560px; perspective: 1500px; }
-      #s3 .tagk { font-size: 26px; font-weight: 500; letter-spacing: 0.3em; color: #a97bff; margin-bottom: 40px; }
-      #s3 .stackm { position: relative; }
-      #s3 .mline { display: block; font-family: "JetBrains Mono", monospace; font-weight: 600; font-size: 118px; line-height: 1.16; letter-spacing: -0.02em; color: #f7f4f9; white-space: pre; }
-      #s3 .hc { display: inline-block; transform-origin: 50% 100%; transform-style: preserve-3d; }
-      #s3 .hc.fun { color: #f7f4f9; }
-      .gcopy { position: absolute; inset: 0; opacity: 0; mix-blend-mode: screen; pointer-events: none; }
-      .gcopy .mline { color: inherit; }
-      .gcopy.warm { color: #ff4d8d; }
-      .gcopy.cool { color: #5ec8ff; }
-      #s3 .rule { margin-top: 50px; width: 360px; height: 4px; background: #8335f1; transform-origin: left center; }
-
-      /* scene 4: logo */
-      #s4 .col { position: absolute; left: 0; right: 0; top: 520px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-      #s4 .bloom { position: absolute; left: 90px; top: 250px; width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(131,53,241,0.45), rgba(131,53,241,0) 62%); }
-      #s4 .logo { width: 420px; height: 420px; border-radius: 92px; overflow: hidden; }
-      #s4 .logo img { width: 100%; height: 100%; display: block; }
-      #s4 .motto2 { margin-top: 80px; font-family: var(--display); font-weight: 700; font-size: 58px; line-height: 1.15; letter-spacing: -0.02em; color: #f7f4f9; width: 900px; }
-      #s4 .motto2 em { font-style: normal; color: #a97bff; }
-      #s4 .dev { margin-top: 56px; font-size: 24px; font-weight: 500; letter-spacing: 0.24em; color: #b9acd6; text-transform: uppercase; }
+      /* ---------- scene 8: motto (final) ---------- */
+      #s8-ghost { left: 60px; top: 1330px; font-size: 620px; color: rgba(22, 16, 31, 0.06); }
+      #s8 .motto { position: absolute; left: 0; right: 0; top: 520px; text-align: center; }
+      #s8 .m1 { font-size: 132px; line-height: 1.08; }
+      #s8 .m2 { font-size: 170px; line-height: 1.02; }
+      #s8 .m3 { font-size: 132px; line-height: 1.08; }
+      #fun { position: relative; display: inline-block; color: var(--ink); }
+      #fun-glow { position: absolute; left: -60px; right: -60px; top: -30px; bottom: -30px; border-radius: 50%; background: radial-gradient(closest-side, rgba(131, 53, 241, 0.35), rgba(131, 53, 241, 0)); opacity: 0; z-index: -1; }
+      #s8 .foot { position: absolute; left: 0; right: 0; top: 1500px; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+      #s8 .foot img { width: 170px; height: 170px; border-radius: 40px; display: block; box-shadow: 0 30px 60px -20px rgba(60, 10, 120, 0.55); }
+      #s8 .foot div { font-size: 44px; font-style: italic; color: rgba(22, 16, 31, 0.6); }
+      #s8-b1 { left: 955px; top: 590px; width: 110px; height: 110px; }
     </style>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="23" data-width="1080" data-height="1920">
-      <div id="bg" class="clip" data-start="0" data-duration="23" data-track-index="0">
-        <div class="bg-void" id="bg-void"></div>
-        <div class="glow-a" id="glow-a" data-layout-allow-overflow></div>
-        <div class="grain"></div>
-      </div>
 
-      <!-- Scene 1: the signal -->
-      <section id="s1" class="scene clip" data-start="0" data-duration="3.3" data-track-index="1">
+      <!-- S1: E se o celular fosse o jogo? -->
+      <section id="s1" class="scene clip bg-white" data-start="0" data-duration="2.46" data-track-index="1">
         <div class="in" id="s1-in">
-          <div class="line" id="s1-line"></div>
-          <div class="pill" id="s1-pill"><div class="pill-in" id="s1-pillin"><i></i><i></i></div></div>
-          <div class="sig mono" id="s1-sig">SINAL DETECTADO</div>
-        </div>
-      </section>
-
-      <!-- Scene 2: 3D camera flight through the DopeOS screens -->
-      <section id="s2" class="scene clip" data-start="3.1" data-duration="9.8" data-track-index="2">
-        <div class="stage" id="stage">
-          <div class="world" id="world" data-layout-allow-overflow>
-            <div class="floor"></div>
-            <i class="dust" style="left:0px; top:0px; transform: translateZ(-200px); width:4px; height:4px"></i><i class="dust" style="left:397px; top:683px; transform: translateZ(-411px); width:7px; height:7px"></i><i class="dust" style="left:794px; top:1366px; transform: translateZ(-622px); width:10px; height:10px"></i><i class="dust" style="left:111px; top:129px; transform: translateZ(-833px); width:4px; height:4px"></i><i class="dust" style="left:508px; top:812px; transform: translateZ(-1044px); width:7px; height:7px"></i><i class="dust" style="left:905px; top:1495px; transform: translateZ(-1255px); width:10px; height:10px"></i><i class="dust" style="left:222px; top:258px; transform: translateZ(-1466px); width:4px; height:4px"></i><i class="dust" style="left:619px; top:941px; transform: translateZ(-1677px); width:7px; height:7px"></i><i class="dust" style="left:1016px; top:1624px; transform: translateZ(-1888px); width:10px; height:10px"></i><i class="dust" style="left:333px; top:387px; transform: translateZ(-2099px); width:4px; height:4px"></i><i class="dust" style="left:730px; top:1070px; transform: translateZ(-2310px); width:7px; height:7px"></i><i class="dust" style="left:47px; top:1753px; transform: translateZ(-2521px); width:10px; height:10px"></i><i class="dust" style="left:444px; top:516px; transform: translateZ(-2732px); width:4px; height:4px"></i><i class="dust" style="left:841px; top:1199px; transform: translateZ(-343px); width:7px; height:7px"></i><i class="dust" style="left:158px; top:1882px; transform: translateZ(-554px); width:10px; height:10px"></i><i class="dust" style="left:555px; top:645px; transform: translateZ(-765px); width:4px; height:4px"></i><i class="dust" style="left:952px; top:1328px; transform: translateZ(-976px); width:7px; height:7px"></i><i class="dust" style="left:269px; top:91px; transform: translateZ(-1187px); width:10px; height:10px"></i><i class="dust" style="left:666px; top:774px; transform: translateZ(-1398px); width:4px; height:4px"></i><i class="dust" style="left:1063px; top:1457px; transform: translateZ(-1609px); width:7px; height:7px"></i><i class="dust" style="left:380px; top:220px; transform: translateZ(-1820px); width:10px; height:10px"></i><i class="dust" style="left:777px; top:903px; transform: translateZ(-2031px); width:4px; height:4px"></i><i class="dust" style="left:94px; top:1586px; transform: translateZ(-2242px); width:7px; height:7px"></i><i class="dust" style="left:491px; top:349px; transform: translateZ(-2453px); width:10px; height:10px"></i><i class="dust" style="left:888px; top:1032px; transform: translateZ(-2664px); width:4px; height:4px"></i><i class="dust" style="left:205px; top:1715px; transform: translateZ(-275px); width:7px; height:7px"></i><i class="dust" style="left:602px; top:478px; transform: translateZ(-486px); width:10px; height:10px"></i><i class="dust" style="left:999px; top:1161px; transform: translateZ(-697px); width:4px; height:4px"></i><i class="dust" style="left:316px; top:1844px; transform: translateZ(-908px); width:7px; height:7px"></i><i class="dust" style="left:713px; top:607px; transform: translateZ(-1119px); width:10px; height:10px"></i><i class="dust" style="left:30px; top:1290px; transform: translateZ(-1330px); width:4px; height:4px"></i><i class="dust" style="left:427px; top:53px; transform: translateZ(-1541px); width:7px; height:7px"></i><i class="dust" style="left:824px; top:736px; transform: translateZ(-1752px); width:10px; height:10px"></i><i class="dust" style="left:141px; top:1419px; transform: translateZ(-1963px); width:4px; height:4px"></i><i class="dust" style="left:538px; top:182px; transform: translateZ(-2174px); width:7px; height:7px"></i><i class="dust" style="left:935px; top:865px; transform: translateZ(-2385px); width:10px; height:10px"></i><i class="dust" style="left:252px; top:1548px; transform: translateZ(-2596px); width:4px; height:4px"></i><i class="dust" style="left:649px; top:311px; transform: translateZ(-207px); width:7px; height:7px"></i><i class="dust" style="left:1046px; top:994px; transform: translateZ(-418px); width:10px; height:10px"></i><i class="dust" style="left:363px; top:1677px; transform: translateZ(-629px); width:4px; height:4px"></i>
-            <div class="card3d" id="ca" data-layout-ignore><div class="card-in layer-dof" id="ca-dof"><div class="scr"><div class="island"></div><div class="sbar"><span>21:47</span><span class="ic"><b></b></span></div><div class="layer" id="l-lock">
-                  <div class="wall"></div>
-                  <div class="clock">21:47</div>
-                  <div class="date">sábado, 27 de setembro</div>
-                  <div class="notifs">
-                    <div class="notif" id="n1"><div class="ai c-loop"><svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5.5v13l10.5-6.5z" /></svg></div><div class="body"><div class="top"><span>Loop</span><span>agora</span></div><p>3 vídeos novos escolhidos pra você</p></div></div>
-                    <div class="notif" id="n2"><div class="ai c-chat"><svg viewBox="0 0 24 24" fill="#fff"><path d="M4 5h16v11H9l-5 4z" /></svg></div><div class="body"><div class="top"><span>Chat · Luna</span><span>agora</span></div><p>sumiu? te vi online agora há pouco</p></div></div>
-                    <div class="notif" id="n3"><div class="ai c-loja"><svg viewBox="0 0 24 24" fill="#fff"><path d="M5 8h14l-1.2 11H6.2z" /><path d="M9 8a3 3 0 0 1 6 0" stroke="#fff" stroke-width="2" fill="none" /></svg></div><div class="body"><div class="top"><span>Loja</span><span>2 min</span></div><p>Sua recompensa diária está esperando</p></div></div>
-                    <div class="notif" id="n4"><div class="ai c-st"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><circle cx="12" cy="12" r="8" /><path d="M12 7.5V12l3 2" /></svg></div><div class="body"><div class="top"><span>Screen Time</span><span>5 min</span></div><p>Você já passou 1h 12min no Loop hoje</p></div></div>
-                  </div>
-                </div>
-
-                </div></div></div><div class="card3d" id="cb" data-layout-ignore><div class="card-in layer-dof" id="cb-dof"><div class="scr"><div class="island"></div><div class="sbar"><span>21:47</span><span class="ic"><b></b></span></div><div class="layer" id="l-loop" style="background: #0a031a">
-                  <div class="feed" id="feed">
-                    <div class="vid">
-                      <svg class="scene-art" viewBox="0 0 668 1258" preserveAspectRatio="none">
-                        <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6a3fb0" /><stop offset="0.55" stop-color="#3a1a7a" /><stop offset="1" stop-color="#3b0f5c" /></linearGradient></defs>
-                        <rect width="668" height="1258" fill="url(#sky1)" />
-                        <circle cx="334" cy="520" r="150" fill="#c9b6f2" opacity="0.9" />
-                        <rect x="0" y="760" width="668" height="498" fill="#2a0b45" />
-                        <rect x="60" y="700" width="548" height="70" rx="8" fill="#1a0630" />
-                        <path d="M250 700 C250 610 270 560 300 540 L292 500 L318 528 C330 524 342 524 354 528 L380 500 L372 540 C402 560 420 610 420 700 Z" fill="#12041f" />
-                        <path d="M420 690 C470 690 490 640 470 610" stroke="#12041f" stroke-width="16" fill="none" stroke-linecap="round" />
-                      </svg>
-                      <div class="shade"></div>
-                      <div class="meta"><b>@gato.do.bairro</b><p>ele achou que ninguém tava vendo o pôr do sol</p></div>
-                    </div>
-                    <div class="vid">
-                      <svg class="scene-art" viewBox="0 0 668 1258" preserveAspectRatio="none">
-                        <defs><linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140a3d" /><stop offset="1" stop-color="#3a0f6e" /></linearGradient></defs>
-                        <rect width="668" height="1258" fill="url(#sky2)" />
-                        <rect x="40" y="380" width="120" height="700" fill="#22105a" /><rect x="190" y="260" width="150" height="820" fill="#2c1570" /><rect x="370" y="420" width="110" height="660" fill="#22105a" /><rect x="500" y="300" width="140" height="780" fill="#2c1570" />
-                        <g fill="#a97bff"><rect x="210" y="300" width="30" height="20" /><rect x="270" y="360" width="30" height="20" /><rect x="520" y="340" width="30" height="20" /><rect x="60" y="430" width="30" height="20" /></g>
-                        <g fill="#7c6bd6"><rect x="270" y="300" width="30" height="20" /><rect x="580" y="400" width="30" height="20" /><rect x="400" y="470" width="30" height="20" /></g>
-                        <rect x="0" y="1060" width="668" height="198" fill="#0d0526" />
-                        <path d="M0 1060 L668 1060" stroke="#a97bff" stroke-width="6" />
-                        <rect x="250" y="1000" width="170" height="16" rx="8" fill="#8a78c0" /><circle cx="275" cy="1030" r="16" fill="#f7f4f9" /><circle cx="395" cy="1030" r="16" fill="#f7f4f9" />
-                      </svg>
-                      <div class="shade"></div>
-                      <div class="meta"><b>@neon.skate</b><p>a cidade de noite é outro jogo</p></div>
-                    </div>
-                    <div class="vid">
-                      <svg class="scene-art" viewBox="0 0 668 1258" preserveAspectRatio="none">
-                        <rect width="668" height="1258" fill="#1a0f3d" />
-                        <circle cx="334" cy="560" r="230" fill="#c9b6f2" />
-                        <circle cx="334" cy="560" r="150" fill="#6a3fb0" />
-                        <circle cx="334" cy="560" r="70" fill="#3a1a7a" />
-                      </svg>
-                      <div class="shade"></div>
-                      <div class="meta"><b>@receita.em.30s</b><p>o doce mais viral da semana</p></div>
-                    </div>
-                  </div>
-                  <div class="loop-top"><span>Seguindo</span><span class="on">Pra você</span></div>
-                  <div class="rail">
-                    <div class="it"><svg viewBox="0 0 24 24"><path id="heart-ic" d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="#f7f4f9" /></svg><span id="likes">12,4 mil</span></div>
-                    <div class="it"><svg viewBox="0 0 24 24" fill="#f7f4f9"><path d="M4 5h16v11H9l-5 4z" /></svg><span>318</span></div>
-                    <div class="it"><svg viewBox="0 0 24 24" fill="#f7f4f9"><path d="M14 5l7 7-7 7v-4c-5 0-8 1.5-10 5 0-6 3-10 10-11z" /></svg><span>Enviar</span></div>
-                  </div>
-                  <div class="heart-burst" id="burst"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.6-7.5 10.2-7.5 10.2z" fill="#a97bff" /></svg></div>
-                  <div class="progress"><i id="prog"></i></div>
-                </div>
-
-                </div></div></div><div class="card3d" id="cc" data-layout-ignore><div class="card-in layer-dof" id="cc-dof"><div class="scr"><div class="island"></div><div class="sbar"><span>21:47</span><span class="ic"><b></b></span></div><div class="layer" id="l-chat">
-                  <div class="chat-bg"></div>
-                  <div class="chat-head"><div class="avatar">L</div><div><b>Luna</b><small>online · tomando café</small></div></div>
-                  <div class="msgs">
-                    <div class="bub them" id="m1">vi que você assistiu o vídeo do gato 3 vezes</div>
-                    <div class="bub them" id="m2">quer que eu te mande mais uns?</div>
-                    <div class="bub me" id="m3">pode mandar</div>
-                  </div>
-                  <div class="typing" id="typing" data-layout-allow-overlap><i></i><i></i><i></i></div>
-                  <div class="composer">Mensagem...</div>
-                </div>
-
-                </div></div></div><div class="card3d" id="cd" data-layout-ignore><div class="card-in layer-dof" id="cd-dof"><div class="scr"><div class="island"></div><div class="sbar"><span>21:47</span><span class="ic"><b></b></span></div><div class="layer" id="l-st">
-                  <div class="st-bg"></div>
-                  <div class="st">
-                    <div class="h">Screen Time</div>
-                    <div class="k">Hoje</div>
-                    <div class="total">2h 36min</div>
-                    <div class="bars">
-                      <div class="bar-row"><div class="top"><span>Loop</span><span>1h 48min</span></div><div class="track"><i id="bar1" style="width: 92%; background: linear-gradient(90deg, #a97bff, #8335f1)"></i></div></div>
-                      <div class="bar-row"><div class="top"><span>Chat</span><span>32min</span></div><div class="track"><i id="bar2" style="width: 30%; background: #8a78c0"></i></div></div>
-                      <div class="bar-row"><div class="top"><span>Loja</span><span>16min</span></div><div class="track"><i id="bar3" style="width: 15%; background: #8a78c0"></i></div></div>
-                    </div>
-                    <div class="learned">
-                      <div class="k2">O que o algoritmo aprendeu</div>
-                      <div class="chips">
-                        <span class="chip" id="ch1">Você ama vídeos de gato</span>
-                        <span class="chip" id="ch2">Você rola mais depois das 21h</span>
-                        <span class="chip" id="ch3">Você volta quando chega notificação</span>
-                      </div>
-                    </div>
-                  </div>
-                </div></div></div>
+          <div class="grid"></div>
+          <div class="ghost" id="s1-ghost">jogo</div>
+          <div class="capwrap" id="s1-cap"><div class="capshadow"></div><div class="cap" id="s1-pill"><div class="a"></div><div class="b"></div><div class="seam"></div><div class="hl"></div></div></div>
+          <div class="head">
+            <div class="lbl" id="s1-lbl">Já pensou nisso?</div>
+            <span class="line t1 i w9 pu"><span class="word">E</span> <span class="word">se</span> <span class="word">o</span> <span class="word">celular</span></span>
+            <span class="line t2 i w4"><span class="word">fosse</span> <span class="word">o</span> <span class="word">jogo?</span></span>
           </div>
+          <div class="cursor" id="s1-cursor"><svg viewBox="0 0 24 30"><path d="M2 2 L2 24 L8 18.5 L12 27 L16 25.2 L12 17 L20 17 Z" fill="#7209b7" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
         </div>
-        <div class="vignette" data-layout-ignore></div>
-        <div class="cap2" id="c-a"><div class="k mono">Sistema operacional fictício</div><h2>Um sistema <em>inteiro.</em></h2></div><div class="cap2" id="c-b"><div class="k mono">Loop</div><h2>Um feed que <em>não termina.</em></h2></div><div class="cap2" id="c-c"><div class="k mono">Chat</div><h2>Alguém <em>lembra de você.</em></h2></div><div class="cap2" id="c-d"><div class="k mono">Screen Time</div><h2>E tudo <em>aprende com você.</em></h2></div>
-        <div class="blackout" id="blackout"></div>
       </section>
 
-      <!-- Scene 3: the motto -->
-      <section id="s3" class="scene clip" data-start="12.9" data-duration="6.76" data-track-index="1">
-        <div class="in" id="s3-in">
-          <div class="wrap" id="s3-wrap">
-            <div class="tagk mono" id="s3-k">// DOPEOS</div>
-            <div class="stackm" id="stackm">
-              <div class="gcopy warm" aria-hidden="true" data-layout-ignore><span class="mline">Welcome to</span><span class="mline">a more fun</span><span class="mline">version of</span><span class="mline">the world.</span></div>
-              <div class="gcopy cool" aria-hidden="true" data-layout-ignore><span class="mline">Welcome to</span><span class="mline">a more fun</span><span class="mline">version of</span><span class="mline">the world.</span></div>
-              <div class="base" id="mbase"></div>
+      <!-- S2: um sistema inteiro -->
+      <section id="s2" class="scene clip bg-purple" data-start="2.46" data-duration="2.18" data-track-index="1">
+        <div class="in" id="s2-in">
+          <div class="grid"></div>
+          <div class="burst" id="s2-b1" style="right: -170px; top: -170px"><svg viewBox="-50 -50 100 100"><polygon fill="#fff" points="0,-50 5,-12 30,-40 10,-6 48,-14 12,2 44,28 6,10 0,50 -5,12 -30,40 -10,6 -48,14 -12,-2 -44,-28 -6,-10"/></svg></div>
+          <div class="burst" id="s2-b2" style="left: -220px; bottom: -220px"><svg viewBox="-50 -50 100 100"><polygon fill="#fff" points="0,-50 5,-12 30,-40 10,-6 48,-14 12,2 44,28 6,10 0,50 -5,12 -30,40 -10,6 -48,14 -12,-2 -44,-28 -6,-10"/></svg></div>
+          <div class="ghost" id="s2-ghost">Sistema</div>
+          <div class="head">
+            <span class="line k i w4"><span class="word">não</span> <span class="word">é</span> <span class="word">um</span> <span class="word">app.</span></span>
+            <span class="line t1 i w9"><span class="word">Sistema</span></span>
+            <span class="line t2 i w4"><span class="word">inteiro.</span></span>
+          </div>
+          <div class="phone" id="s2-phone"><div class="scr"><div class="isl"></div>
+            <div class="clk">21:47</div><div class="dt">sexta-feira, 12 de setembro</div>
+            <div class="nts">
+              <div class="nt" id="n1"><b>Loop</b><span>Um vídeo novo feito pra você</span></div>
+              <div class="nt" id="n2"><b>Chat · Luna</b><span>vi o que você curtiu ontem…</span></div>
+              <div class="nt" id="n3"><b>Loja</b><span>Seu saldo rendeu +120 ◆</span></div>
             </div>
-            <div class="rule" id="s3-rule"></div>
+          </div></div>
+        </div>
+      </section>
+
+      <!-- S3: Loop, um feed que nunca acaba -->
+      <section id="s3" class="scene clip bg-white" data-start="4.64" data-duration="2.19" data-track-index="1">
+        <div class="in" id="s3-in">
+          <div class="grid"></div>
+          <div id="s3-big" class="i w9"><span class="word" id="s3-bigw">Loop</span></div>
+          <div id="s3-small" class="i w4 pu"><span class="word" id="s3-smallw">um feed</span></div>
+          <div class="sub"><span class="line i w4"><span class="word">que</span> <span class="word">nunca</span></span><span class="line i w9 pu"><span class="word">acaba.</span></span></div>
+          <div class="feed-win"><div class="feed" id="feed">
+            <div class="vc"><svg class="art" viewBox="0 0 440 700" preserveAspectRatio="none"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb86b"/><stop offset="0.55" stop-color="#ff5e9c"/><stop offset="1" stop-color="#5a16c9"/></linearGradient></defs><rect width="440" height="700" fill="url(#g1)"/><circle cx="220" cy="300" r="110" fill="#fff4c9" opacity="0.9"/><path d="M0 520 Q110 440 220 500 T440 470 V700 H0Z" fill="#2a0b5e" opacity="0.85"/></svg><div class="meta"><b>@luna.exe</b><i></i><i></i></div><div class="rail"><span></span><span></span><span></span></div></div>
+            <div class="vc"><svg class="art" viewBox="0 0 440 700" preserveAspectRatio="none"><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3ce0c5"/><stop offset="1" stop-color="#2a1290"/></linearGradient></defs><rect width="440" height="700" fill="url(#g2)"/><rect x="90" y="170" width="260" height="260" rx="60" fill="#fff" opacity="0.18" transform="rotate(18 220 300)"/><circle cx="220" cy="300" r="70" fill="#fff" opacity="0.85"/></svg><div class="meta"><b>@neon.kid</b><i></i><i></i></div><div class="rail"><span></span><span></span><span></span></div></div>
+            <div class="vc"><svg class="art" viewBox="0 0 440 700" preserveAspectRatio="none"><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b784ff"/><stop offset="1" stop-color="#16062f"/></linearGradient></defs><rect width="440" height="700" fill="url(#g3)"/><path d="M60 460 L160 280 L240 400 L300 320 L390 460Z" fill="#fff" opacity="0.8"/></svg><div class="meta"><b>@mo.dope</b><i></i><i></i></div><div class="rail"><span></span><span></span><span></span></div></div>
+            <div class="vc"><svg class="art" viewBox="0 0 440 700" preserveAspectRatio="none"><defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff5e9c"/><stop offset="1" stop-color="#7209b7"/></linearGradient></defs><rect width="440" height="700" fill="url(#g4)"/><circle cx="150" cy="260" r="60" fill="#fff" opacity="0.8"/><circle cx="300" cy="380" r="90" fill="#fff" opacity="0.35"/></svg><div class="meta"><b>@luna.exe</b><i></i><i></i></div><div class="rail"><span></span><span></span><span></span></div></div>
+          </div></div>
+          <div class="heart" id="s3-heart"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2.1 0 3.6 1.2 4.6 2.7h2C14 6.2 15.5 5 17.6 5 21 5 23.1 8.4 21.6 11.8 19.5 16.4 12 21 12 21z" fill="#7209b7" stroke="#fff" stroke-width="1.2"/></svg></div>
+        </div>
+      </section>
+
+      <!-- S4: personagens com memória -->
+      <section id="s4" class="scene clip bg-cream" data-start="6.83" data-duration="2.18" data-track-index="1">
+        <div class="in" id="s4-in">
+          <div class="ghost" id="s4-ghost">memória</div>
+          <div class="head">
+            <span class="line t1 i w9 pu"><span class="word">Personagens</span></span>
+            <span class="line t2 i w4"><span class="word">com</span></span>
+            <span class="line t3 i w4" id="s4-mem"></span>
+          </div>
+          <div class="bubble" id="s4-bub">
+            <div class="who"><i></i><div>Luna<small>digitando…</small></div></div>
+            <div class="msg">
+              <div class="dots" id="s4-dots"><i></i><i></i><i></i></div>
+              <div class="txt" id="s4-txt">“ainda pensando naquele vídeo que você curtiu”</div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Scene 4: logo -->
-      <section id="s4" class="scene clip" data-start="19.66" data-duration="3.34" data-track-index="1">
-        <div class="in" id="s4-in">
-          <div class="bloom" id="s4-bloom"></div>
-          <div class="col">
-            <div class="logo" id="s4-logo"><img id="s4-img" src="assets/brand/dopeos_logo.png" alt="" /></div>
-            <div class="motto2" id="s4-motto">Welcome to a more <em>fun</em> version of the world.</div>
-            <div class="dev mono" id="s4-dev">Em desenvolvimento · Android</div>
+      <!-- S5: o algoritmo observa -->
+      <section id="s5" class="scene clip bg-purple" data-start="9.01" data-duration="2.18" data-track-index="1">
+        <div class="in" id="s5-in">
+          <div class="grid"></div>
+          <div class="burst" id="s5-b1" style="right: -200px; top: -200px"><svg viewBox="-50 -50 100 100"><polygon fill="#fff" points="0,-50 5,-12 30,-40 10,-6 48,-14 12,2 44,28 6,10 0,50 -5,12 -30,40 -10,6 -48,14 -12,-2 -44,-28 -6,-10"/></svg></div>
+          <div class="burst" id="s5-b2" style="left: -240px; bottom: -240px"><svg viewBox="-50 -50 100 100"><polygon fill="#fff" points="0,-50 5,-12 30,-40 10,-6 48,-14 12,2 44,28 6,10 0,50 -5,12 -30,40 -10,6 -48,14 -12,-2 -44,-28 -6,-10"/></svg></div>
+          <div class="k i w4"><span class="word">O algoritmo</span></div>
+          <div class="big i"><span class="word">observa</span></div>
+          <div class="eye" id="s5-eye"><div class="iris" id="s5-iris"><div class="pupil" id="s5-pupil"></div><div class="glint"></div></div></div>
+          <div class="t2 i w9"><span class="word">cada</span> <span class="word">toque</span></div>
+          <div class="t3 i w4"><span class="word">e aprende.</span></div>
+        </div>
+      </section>
+
+      <!-- S6: screen time chart -->
+      <section id="s6" class="scene clip" data-start="11.19" data-duration="2.18" data-track-index="1">
+        <div class="in" id="s6-in">
+          <div class="head">
+            <span class="line t1 i w9 pu"><span class="word">Screen</span> <span class="word">Time</span></span>
+            <span class="line t2 i w4"><span class="word">sem</span> <span class="word">segredos</span></span>
           </div>
+          <div class="chart" id="s6-chart">
+            <svg viewBox="0 0 700 1080" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="ln" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#58e6ff"/><stop offset="1" stop-color="#c49bff"/></linearGradient>
+                <filter id="neon" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <g stroke="rgba(160,120,255,0.28)" stroke-width="2" fill="none">
+                <path d="M-100 700 L800 560"/><path d="M-100 820 L800 660"/><path d="M-100 940 L800 760"/><path d="M-100 1060 L800 860"/>
+                <path d="M100 480 L-20 1080"/><path d="M260 470 L200 1080"/><path d="M420 460 L420 1080"/><path d="M580 450 L640 1080"/>
+              </g>
+              <path id="s6-line" d="M40 800 L150 690 L260 715 L370 690 L470 610 L560 470 L640 330" stroke="url(#ln)" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#neon)"/>
+              <g fill="#e8fbff" filter="url(#neon)">
+                <circle class="dot" cx="150" cy="690" r="13"/><circle class="dot" cx="260" cy="715" r="13"/><circle class="dot" cx="370" cy="690" r="13"/><circle class="dot" cx="470" cy="610" r="13"/><circle class="dot" cx="560" cy="470" r="13"/><circle class="dot" cx="640" cy="330" r="17"/>
+              </g>
+            </svg>
+            <div class="lab"><b>Hoje · Loop</b><span id="s6-num">0h 00</span></div>
+          </div>
+          <div class="cap2 i w4"><span class="word">a sua atenção move o mundo</span></div>
+        </div>
+      </section>
+
+      <!-- S7: não é só distração -->
+      <section id="s7" class="scene clip bg-white" data-start="13.37" data-duration="2.18" data-track-index="1">
+        <div class="in" id="s7-in">
+          <div class="band" id="s7-band"></div>
+          <div class="head">
+            <span class="line t1 i w4"><span class="word">não</span> <span class="word">é</span> <span class="word">só</span></span>
+            <span class="line t2 i w9 pu"><span class="word">distração.</span></span>
+          </div>
+          <div class="capwrap" id="s7-cap"><div class="cap" id="s7-pill"><div class="a"></div><div class="b"></div><div class="seam"></div><div class="hl"></div></div></div>
+          <div class="t3 i"><span class="line w4"><span class="word">é um mundo</span></span><span class="line w9"><span class="word">inteiro.</span></span></div>
+        </div>
+      </section>
+
+      <!-- S8: the motto (final) -->
+      <section id="s8" class="scene clip bg-white" data-start="15.55" data-duration="7.45" data-track-index="1">
+        <div class="in" id="s8-in">
+          <div class="grid"></div>
+          <div class="ghost" id="s8-ghost">fun</div>
+          <div class="burst" id="s8-b1"><svg viewBox="-50 -50 100 100"><polygon fill="#8335f1" points="0,-50 5,-12 30,-40 10,-6 48,-14 12,2 44,28 6,10 0,50 -5,12 -30,40 -10,6 -48,14 -12,-2 -44,-28 -6,-10"/></svg></div>
+          <div class="motto">
+            <span class="line m1 i w4"><span class="word">Welcome</span> <span class="word">to</span></span>
+            <span class="line m2 i w9"><span class="word">a</span> <span class="word">more</span> <span class="word" id="fun-w"><span id="fun"><span id="fun-glow"></span>fun</span></span></span>
+            <span class="line m3 i w4"><span class="word">version</span> <span class="word">of</span></span>
+            <span class="line m3 i w4"><span class="word">the</span> <span class="word">world.</span></span>
+          </div>
+          <div class="foot" id="s8-foot"><img src="assets/brand/dopeos_logo.png" alt="DopeOS" id="s8-logo" /><div id="s8-dev">Em desenvolvimento · Android</div></div>
         </div>
       </section>
 
       <audio id="music" src="assets/music/happy-beats-business-moves-vol-12-by-ende-dot-app.mp3" data-start="0" data-duration="23" data-track-index="10" data-volume="1"
-        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":1.6,"v":0.26},{"t":21.6,"v":0.26},{"t":23,"v":0}]}]}'></audio>
-      <audio id="sfx-sig" src="assets/sfx/interface/glitch_002.ogg" data-start="1.2" data-duration="0.03" data-track-index="11" data-volume="0.35"></audio>
-      <audio id="sfx-dive" src="assets/sfx/impact/impactSoft_medium_001.ogg" data-start="2.9" data-duration="0.18" data-track-index="12" data-volume="0.45"></audio>
-      <audio id="sfx-f1" src="assets/sfx/casino/card-slide-1.ogg" data-start="5.55" data-duration="0.6" data-track-index="13" data-volume="0.14"></audio>
-      <audio id="sfx-f2" src="assets/sfx/casino/card-slide-1.ogg" data-start="7.75" data-duration="0.6" data-track-index="14" data-volume="0.14"></audio>
-      <audio id="sfx-f3" src="assets/sfx/casino/card-slide-1.ogg" data-start="9.95" data-duration="0.6" data-track-index="15" data-volume="0.14"></audio>
-      <audio id="sfx-cut" src="assets/sfx/interface/glitch_004.ogg" data-start="12.8" data-duration="0.02" data-track-index="16" data-volume="0.45"></audio>
-      <audio id="sfx-t1" src="assets/sfx/keyboard/keypress-003.wav" data-start="13.2" data-duration="0.25" data-track-index="17" data-volume="0.14"></audio>
-      <audio id="sfx-t2" src="assets/sfx/keyboard/keypress-011.wav" data-start="13.62" data-duration="0.25" data-track-index="18" data-volume="0.12"></audio>
-      <audio id="sfx-t3" src="assets/sfx/keyboard/keypress-018.wav" data-start="14.04" data-duration="0.25" data-track-index="19" data-volume="0.14"></audio>
-      <audio id="sfx-t4" src="assets/sfx/keyboard/keypress-025.wav" data-start="14.46" data-duration="0.25" data-track-index="20" data-volume="0.12"></audio>
-      <audio id="sfx-glitch" src="assets/sfx/interface/glitch_002.ogg" data-start="17.47" data-duration="0.03" data-track-index="21" data-volume="0.5"></audio>
-      <audio id="sfx-logo" src="assets/sfx/impact/impactBell_heavy_000.ogg" data-start="19.64" data-duration="1.48" data-track-index="22" data-volume="0.38"></audio>
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0.3},{"t":21.6,"v":0.34},{"t":23,"v":0}]}]}'></audio>
+      <audio id="sfx-click" src="assets/sfx/ui/click2.ogg" data-start="1.66" data-duration="0.2" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sfx-c1" src="assets/sfx/casino/card-slide-1.ogg" data-start="2.42" data-duration="0.5" data-track-index="12" data-volume="0.22"></audio>
+      <audio id="sfx-n1" src="assets/sfx/interface/drop_001.ogg" data-start="3.4" data-duration="0.3" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="sfx-n2" src="assets/sfx/interface/drop_002.ogg" data-start="3.67" data-duration="0.3" data-track-index="14" data-volume="0.3"></audio>
+      <audio id="sfx-n3" src="assets/sfx/interface/drop_001.ogg" data-start="3.95" data-duration="0.3" data-track-index="15" data-volume="0.3"></audio>
+      <audio id="sfx-c2" src="assets/sfx/casino/card-slide-1.ogg" data-start="4.6" data-duration="0.5" data-track-index="16" data-volume="0.22"></audio>
+      <audio id="sfx-heart" src="assets/sfx/impact/impactSoft_medium_001.ogg" data-start="5.92" data-duration="0.2" data-track-index="17" data-volume="0.45"></audio>
+      <audio id="sfx-c3" src="assets/sfx/casino/card-slide-1.ogg" data-start="6.79" data-duration="0.5" data-track-index="18" data-volume="0.22"></audio>
+      <audio id="sfx-k1" src="assets/sfx/keyboard/keypress-003.wav" data-start="7.6" data-duration="0.2" data-track-index="19" data-volume="0.15"></audio>
+      <audio id="sfx-k2" src="assets/sfx/keyboard/keypress-011.wav" data-start="7.85" data-duration="0.2" data-track-index="20" data-volume="0.13"></audio>
+      <audio id="sfx-msg" src="assets/sfx/interface/bong_001.ogg" data-start="8.2" data-duration="0.5" data-track-index="21" data-volume="0.3"></audio>
+      <audio id="sfx-c4" src="assets/sfx/casino/card-slide-1.ogg" data-start="8.97" data-duration="0.5" data-track-index="22" data-volume="0.22"></audio>
+      <audio id="sfx-c5" src="assets/sfx/casino/card-slide-1.ogg" data-start="11.15" data-duration="0.5" data-track-index="23" data-volume="0.22"></audio>
+      <audio id="sfx-c6" src="assets/sfx/casino/card-slide-1.ogg" data-start="13.33" data-duration="0.5" data-track-index="24" data-volume="0.22"></audio>
+      <audio id="sfx-c7" src="assets/sfx/ui/rollover2.ogg" data-start="15.53" data-duration="0.3" data-track-index="25" data-volume="0.35"></audio>
+      <audio id="sfx-fun" src="assets/sfx/impact/impactGlass_light_001.ogg" data-start="19.64" data-duration="0.6" data-track-index="26" data-volume="0.5"></audio>
+      <audio id="sfx-logo" src="assets/sfx/impact/impactBell_heavy_000.ogg" data-start="20.5" data-duration="1.48" data-track-index="27" data-volume="0.3"></audio>
     </div>
 
     <script>
       (function () {
-        var TOTAL = 23;
-        var LINES = ['Welcome to', 'a more fun', 'version of', 'the world.'];
+        // beat grid of the track: ~110 BPM, first beat at 0.28s
+        var BEAT = 0.5455;
+        function beat(n) { return 0.28 + n * BEAT; }
 
-        // ---- decode text: live per-char spans (base) ----
-        var base = document.getElementById("mbase");
-        var chars = [];
-        LINES.forEach(function (line) {
-          var row = document.createElement("span");
-          row.className = "mline";
-          line.split("").forEach(function (ch) {
-            var s = document.createElement("span");
-            s.className = "hc";
-            s.textContent = ch === " " ? "\u00a0" : ch;
-            s.dataset.t = ch;
-            row.appendChild(s);
-            chars.push(s);
-          });
-          base.appendChild(row);
+        // "memória" as per-letter spans (blur-in letter by letter, like the pin's "Story")
+        var mem = document.getElementById("s4-mem");
+        "memória".split("").forEach(function (ch) {
+          var s = document.createElement("span");
+          s.className = "word ch";
+          s.textContent = ch;
+          mem.appendChild(s);
         });
-        // mark "fun" (line 2, chars 7..9)
-        var funChars = chars.slice(10 + 7, 10 + 10);
-        funChars.forEach(function (c) { c.classList.add("fun"); });
 
-        var GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*/<>";
-        function pseudoGlyph(seed) {
-          var h = ((seed * 9301 + 49297) % 233280) / 233280;
-          return GLYPHS[Math.floor(h * GLYPHS.length)];
+        function words(sel) { return gsap.utils.toArray(sel + " .word"); }
+        function blurIn(tl, targets, at, opts) {
+          opts = opts || {};
+          tl.fromTo(targets,
+            { opacity: 0, y: opts.y == null ? 60 : opts.y, filter: "blur(18px)" },
+            { opacity: 1, y: 0, filter: "blur(0px)", duration: opts.d || 0.42, ease: "power3.out", stagger: opts.s == null ? 0.08 : opts.s },
+            at);
         }
-        function glitchHash(n) {
-          var x = Math.sin(n * 12.9898) * 43758.5453;
-          return x - Math.floor(x);
+        function blurOut(tl, target, at) {
+          tl.to(target, { filter: "blur(16px)", opacity: 0.2, scale: 1.04, duration: 0.14, ease: "power2.in" }, at);
         }
 
         function build() {
           var tl = gsap.timeline({ paused: true });
 
-          // ================= Scene 1: the signal =================
-          tl.fromTo("#s1-line", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 1.2, ease: "power2.out" }, 0.5);
-          tl.fromTo("#s1-pill", { opacity: 0, scale: 0.85, rotation: -38 }, { opacity: 0.9, scale: 1, rotation: -38, duration: 1.4, ease: "power2.out" }, 0.3);
-          tl.fromTo("#s1-sig", { opacity: 0 }, { opacity: 1, duration: 0.05 }, 1.2);
-          tl.to("#s1-sig", { opacity: 0.2, duration: 0.05, yoyo: true, repeat: 3, repeatDelay: 0.12 }, 1.3);
-          // camera dives into the capsule
-          tl.to("#s1-pill", { scale: 14, duration: 0.55, ease: "power4.in" }, 2.75);
-          tl.to(["#s1-line", "#s1-sig"], { opacity: 0, duration: 0.3 }, 2.75);
-          tl.to("#s1-in", { opacity: 0, duration: 0.2 }, 3.1);
+          // ================= S1 (0 – 2.46) =================
+          tl.fromTo("#s1-lbl", { scaleX: 0, transformOrigin: "50% 50%" }, { scaleX: 1, duration: 0.35, ease: "power4.out" }, 0.1);
+          blurIn(tl, words("#s1 .t1"), 0.35);
+          blurIn(tl, words("#s1 .t2"), beat(1));
+          tl.fromTo("#s1-ghost", { x: 180, opacity: 0 }, { x: -120, opacity: 1, duration: 2.46, ease: "none" }, 0);
+          tl.fromTo("#s1-cap", { y: 260, opacity: 0, rotation: 20, scale: 0.8 }, { y: 0, opacity: 1, rotation: 0, scale: 1, duration: 0.8, ease: "power3.out" }, 0.25);
+          tl.to("#s1-pill", { y: -24, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.9);
+          tl.fromTo("#s1-cursor", { x: 1100, y: 1700 }, { x: 540, y: 1270, duration: 0.7, ease: "power3.out" }, 0.95);
+          tl.to("#s1-cursor", { scale: 0.82, duration: 0.07, yoyo: true, repeat: 1 }, 1.66);
+          tl.to("#s1-cap", { scale: 1.12, duration: 0.12, yoyo: true, repeat: 1, ease: "power2.out" }, 1.66);
+          blurOut(tl, "#s1-in", 2.32);
 
-          // ================= Scene 2: 3D camera flight =================
-          var world = document.getElementById("world");
-          var cam = { x: 0, y: 0, z: -2600, rx: 14, ry: 0 };
-          function applyCamera() {
-            world.style.transform = "translate3d(" + cam.x + "px," + cam.y + "px," + cam.z + "px) rotateX(" + cam.rx + "deg) rotateY(" + cam.ry + "deg)";
-          }
-          applyCamera();
-          var LAND = 90;
-          var POSES = {
-            a: { x: 0, y: 60, z: LAND, rx: 0, ry: 4 },
-            b: { x: -980, y: 180, z: 700 + LAND, rx: 0, ry: 0 },
-            c: { x: 960, y: -20, z: 1400 + LAND, rx: 0, ry: 0 },
-            d: { x: -120, y: 120, z: 2150 + LAND, rx: 0, ry: 0 }
-          };
-          var dof = { a: "#ca-dof", b: "#cb-dof", c: "#cc-dof", d: "#cd-dof" };
-          tl.set(["#cb-dof", "#cc-dof", "#cd-dof", "#ca-dof"], { "--dof": "8px" }, 3.1);
-          // LEG 1 — dive in from the dark onto the lock screen
-          tl.fromTo(cam, { x: 0, y: 0, z: -2600, rx: 14, ry: 0 }, { x: POSES.a.x, y: POSES.a.y, z: POSES.a.z, rx: 0, ry: POSES.a.ry, duration: 1.3, ease: "power4.out", onUpdate: applyCamera }, 3.1);
-          tl.to("#ca-dof", { "--dof": "0px", duration: 1.0, ease: "power3.out" }, 3.3);
-          // LEGS 2-4 — fly between screens, rack focus as each one lands
-          [["b", 5.55], ["c", 7.75], ["d", 9.95]].forEach(function (leg, i) {
-            var prev = ["a", "b", "c"][i];
-            tl.to(cam, { x: POSES[leg[0]].x, y: POSES[leg[0]].y, z: POSES[leg[0]].z, ry: POSES[leg[0]].ry, duration: 1.05, ease: "power3.inOut", onUpdate: applyCamera }, leg[1]);
-            tl.to(dof[prev], { "--dof": "10px", duration: 0.7, ease: "power2.in" }, leg[1]);
-            tl.to(dof[leg[0]], { "--dof": "0px", duration: 0.8, ease: "power3.out" }, leg[1] + 0.35);
-          });
-          // hold micro-drift (same writer): tiny rx sway during holds
-          var holds = [[4.4, 5.55], [6.6, 7.75], [8.8, 9.95], [11.0, 12.0]];
-          holds.forEach(function (h) {
-            tl.to(cam, { rx: 1.2, duration: (h[1] - h[0]) / 2, ease: "sine.inOut", yoyo: true, repeat: 1, onUpdate: applyCamera }, h[0]);
-          });
-          // PULL BACK into the void, then black
-          tl.to(cam, { z: -3400, rx: 18, x: -60, duration: 0.9, ease: "power3.in", onUpdate: applyCamera }, 12.0);
-          tl.fromTo("#blackout", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.in" }, 12.5);
-          tl.fromTo("#stage", { filter: "blur(0px)" }, { filter: "blur(14px)", duration: 0.6, ease: "power2.in" }, 12.2);
-          // captions land with the camera
-          tl.fromTo("#c-a", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 4.2);
-          tl.to("#c-a", { opacity: 0, duration: 0.3, ease: "power2.in" }, 5.25);
-          tl.fromTo("#c-b", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 6.3);
-          tl.to("#c-b", { opacity: 0, duration: 0.3, ease: "power2.in" }, 7.45);
-          tl.fromTo("#c-c", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 8.5);
-          tl.to("#c-c", { opacity: 0, duration: 0.3, ease: "power2.in" }, 9.649999999999999);
-          tl.fromTo("#c-d", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 10.7);
-          tl.to("#c-d", { opacity: 0, duration: 0.3, ease: "power2.in" }, 12.0);
+          // ================= S2 (2.46 – 4.64) =================
+          var s2 = 2.46;
+          tl.fromTo(["#s2-b1", "#s2-b2"], { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.6)" }, s2);
+          tl.to(["#s2-b1", "#s2-b2"], { rotation: 25, duration: 1.7, ease: "none" }, s2 + 0.5);
+          blurIn(tl, words("#s2 .k"), s2 + 0.05, { s: 0.05 });
+          blurIn(tl, words("#s2 .t1"), s2 + 0.3, { y: 90 });
+          blurIn(tl, words("#s2 .t2"), s2 + 0.55);
+          tl.fromTo("#s2-ghost", { x: 200 }, { x: -200, duration: 2.18, ease: "none" }, s2);
+          tl.fromTo("#s2-phone", { y: 900, rotation: 12 }, { y: 0, rotation: -6, duration: 0.8, ease: "power4.out" }, s2 + 0.15);
+          tl.fromTo(["#n1", "#n2", "#n3"], { opacity: 0, y: -40, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "power3.out", stagger: 0.275 }, s2 + 0.94);
+          blurOut(tl, "#s2-in", 4.5);
 
-          // screen micro-life
-          tl.fromTo("#burst", { opacity: 0, scale: 0.8 }, { opacity: 0.85, scale: 1, duration: 0.3, ease: "power2.out" }, 6.7);
-          tl.to("#burst", { opacity: 0, y: -50, duration: 0.4, ease: "power2.in" }, 7.05);
-          tl.fromTo("#prog", { scaleX: 0.1 }, { scaleX: 0.6, duration: 2.2, ease: "none" }, 5.55);
-          tl.fromTo("#typing", { opacity: 0 }, { opacity: 0 }, 3.1);
-          ["#bar1", "#bar2", "#bar3"].forEach(function (b, i) {
-            tl.fromTo(b, { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "expo.out" }, 10.6 + i * 0.1);
-          });
-          ["#ch1", "#ch2", "#ch3"].forEach(function (c, i) {
-            tl.fromTo(c, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 10.9 + i * 0.28);
-          });
+          // ================= S3 (4.64 – 6.83) =================
+          var s3 = 4.64;
+          tl.fromTo("#s3-bigw", { opacity: 0, x: -300, filter: "blur(20px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.5, ease: "power4.out" }, s3);
+          tl.fromTo("#s3-smallw", { opacity: 0, x: -120, filter: "blur(14px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.45, ease: "power3.out" }, s3 + 0.2);
+          blurIn(tl, words("#s3 .sub"), s3 + 0.35);
+          tl.fromTo(".feed-win", { y: 400, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: "power3.out" }, s3 + 0.1);
+          tl.to("#feed", { y: -724, duration: 0.45, ease: "power3.inOut" }, s3 + 0.73);
+          tl.to("#feed", { y: -1448, duration: 0.45, ease: "power3.inOut" }, s3 + 1.55);
+          tl.fromTo("#s3-heart", { scale: 0, opacity: 0, rotation: -20 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.3, ease: "back.out(2.4)" }, 5.92);
+          tl.to("#s3-heart", { y: -160, opacity: 0, scale: 1.3, duration: 0.45, ease: "power2.in" }, 6.3);
+          blurOut(tl, "#s3-in", 6.69);
 
-          // ================= Scene 3: the motto decodes =================
-          tl.fromTo("#s3-k", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 13.0);
-          var STAGGER = 0.038, FLIP = 0.7;
-          chars.forEach(function (el, i) {
-            var st = { p: 0 };
-            tl.fromTo(st, { p: 0 }, {
-              p: 1, duration: FLIP, ease: "power3.out",
-              onUpdate: function () {
-                var t = el.dataset.t;
-                if (t !== " ") el.textContent = st.p < 0.62 ? pseudoGlyph(i * 1000 + Math.floor(st.p * 24)) : t;
-                el.style.transform = "rotateX(" + (90 - st.p * 90) + "deg)";
-                el.style.opacity = String(Math.min(1, st.p * 2));
-              }
-            }, 13.15 + i * STAGGER);
-          });
-          tl.fromTo("#s3-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "expo.out" }, 15.2);
-          // slow push-in while it holds
-          tl.fromTo("#s3-wrap", { scale: 1 }, { scale: 1.05, duration: 6.2, ease: "none", transformOrigin: "0% 50%" }, 13.1);
-          // beat-locked: 17.47s (strong cue) — chromatic glitch hits the motto, "fun" ignites
-          var copies = gsap.utils.toArray("#stackm .gcopy");
-          var amp = { a: 0 };
-          tl.set(copies, { opacity: 0 }, 12.9);
-          tl.set(copies, { opacity: 0.85 }, 17.47);
-          tl.fromTo(amp, { a: 1 }, {
-            a: 0, duration: 0.6, ease: "power3.in",
-            onUpdate: function () {
-              var step = Math.floor(tl.time() / 0.05);
-              copies.forEach(function (el, layer) {
-                var jx = (glitchHash(step * 13 + layer * 7) * 2 - 1) * 26 * amp.a;
-                var jy = (glitchHash(step * 29 + layer * 11) * 2 - 1) * 9 * amp.a;
-                el.style.transform = "translate(" + jx.toFixed(1) + "px," + jy.toFixed(1) + "px)";
-              });
-            }
-          }, 17.47);
-          tl.set(copies, { opacity: 0, x: 0, y: 0 }, 18.08);
-          tl.fromTo(funChars, { color: "#f7f4f9", textShadow: "0 0 0px rgba(169,123,255,0)" }, { color: "#a97bff", textShadow: "0 0 36px rgba(169,123,255,0.9)", duration: 0.25, ease: "power2.out" }, 17.5);
+          // ================= S4 (6.83 – 9.01) =================
+          var s4 = 6.83;
+          blurIn(tl, words("#s4 .t1"), s4 + 0.02, { y: 80 });
+          blurIn(tl, words("#s4 .t2"), s4 + 0.2);
+          tl.fromTo("#s4-mem .ch", { opacity: 0, filter: "blur(22px)", y: 30 }, { opacity: 1, filter: "blur(0px)", y: 0, duration: 0.35, ease: "power2.out", stagger: 0.05 }, s4 + 0.32);
+          tl.fromTo("#s4-ghost", { x: 100 }, { x: -260, duration: 2.18, ease: "none" }, s4);
+          tl.fromTo("#s4-bub", { opacity: 0, y: 160, scale: 0.7, transformOrigin: "0% 100%" }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "back.out(1.5)" }, s4 + 0.4);
+          tl.fromTo("#s4-dots i", { y: 0 }, { y: -18, duration: 0.16, ease: "sine.out", yoyo: true, repeat: 3, stagger: 0.09 }, s4 + 0.72);
+          tl.to("#s4-dots", { opacity: 0, duration: 0.12 }, 8.18);
+          tl.fromTo("#s4-txt", { opacity: 0, y: 24, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.35, ease: "power3.out" }, 8.2);
+          blurOut(tl, "#s4-in", 8.87);
 
-          // ================= Scene 4: logo from the dark =================
-          // beat-locked: 19.66s (strong cue)
-          tl.fromTo("#s4-bloom", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.4, ease: "power2.out" }, 19.66);
-          tl.fromTo("#s4-logo", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" }, 19.66);
-          tl.fromTo("#s4-img", { filter: "blur(18px)" }, { filter: "blur(0px)", duration: 1.0, ease: "power3.out" }, 19.66);
-          tl.fromTo("#s4-motto", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 20.1);
-          tl.fromTo("#s4-dev", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 20.6);
+          // ================= S5 (9.01 – 11.19) =================
+          var s5 = 9.01;
+          tl.fromTo(["#s5-b1", "#s5-b2"], { scale: 0, rotation: 30 }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(1.6)" }, s5);
+          tl.to(["#s5-b1", "#s5-b2"], { rotation: -25, duration: 1.7, ease: "none" }, s5 + 0.5);
+          blurIn(tl, words("#s5 .k"), s5 + 0.02);
+          blurIn(tl, words("#s5 .big"), s5 + 0.2, { y: 90 });
+          tl.fromTo("#s5-eye", { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.6, ease: "back.out(1.4)" }, s5 + 0.3);
+          tl.to("#s5-iris", { x: -70, y: 30, duration: 0.3, ease: "power3.inOut" }, s5 + 0.95);
+          tl.to("#s5-iris", { x: 60, y: -20, duration: 0.3, ease: "power3.inOut" }, s5 + 1.35);
+          tl.to("#s5-iris", { x: 0, y: 40, duration: 0.3, ease: "power3.inOut" }, s5 + 1.72);
+          tl.fromTo("#s5-pupil", { scale: 1 }, { scale: 1.35, duration: 0.25, ease: "power2.out" }, s5 + 1.72);
+          blurIn(tl, words("#s5 .t2"), s5 + 0.82, { y: 70 });
+          blurIn(tl, words("#s5 .t3"), s5 + 1.36);
+          blurOut(tl, "#s5-in", 11.05);
 
-          // ================= audio-reactive: bass breathes the void and the capsule =================
+          // ================= S6 (11.19 – 13.37) =================
+          var s6 = 11.19;
+          blurIn(tl, words("#s6 .t1"), s6 + 0.02, { y: 80 });
+          blurIn(tl, words("#s6 .t2"), s6 + 0.3);
+          tl.fromTo("#s6-chart", { opacity: 0, y: 140, filter: "blur(20px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out" }, s6 + 0.1);
+          var line = document.getElementById("s6-line");
+          var L = line.getTotalLength();
+          tl.fromTo(line, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.3, ease: "power2.inOut" }, s6 + 0.45);
+          tl.fromTo("#s6 .dot", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.25, ease: "back.out(3)", stagger: 0.2 }, s6 + 0.62);
+          var num = { v: 0 };
+          var numEl = document.getElementById("s6-num");
+          tl.fromTo(num, { v: 0 }, { v: 347, duration: 1.3, ease: "power2.inOut", onUpdate: function () {
+            var m = Math.round(num.v); numEl.textContent = Math.floor(m / 60) + "h " + String(m % 60).padStart(2, "0");
+          } }, s6 + 0.45);
+          blurIn(tl, words("#s6 .cap2"), s6 + 1.2);
+          blurOut(tl, "#s6-in", 13.23);
+
+          // ================= S7 (13.37 – 15.55) =================
+          var s7 = 13.37;
+          blurIn(tl, words("#s7 .t1"), s7 + 0.02);
+          tl.fromTo(words("#s7 .t2"), { opacity: 0, scale: 1.6, filter: "blur(24px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "power4.out" }, beat(24) + 0.28);
+          tl.fromTo("#s7-band", { yPercent: 100 }, { yPercent: 0, duration: 0.5, ease: "power4.out" }, s7 + 0.55);
+          tl.fromTo("#s7-cap", { y: 700, rotation: -30 }, { y: 0, rotation: 0, duration: 0.7, ease: "power3.out" }, s7 + 0.6);
+          tl.to("#s7-pill", { rotation: -20, duration: 1.2, ease: "sine.inOut" }, s7 + 1.0);
+          blurIn(tl, words("#s7 .t3"), s7 + 1.0, { s: 0.14 });
+          blurOut(tl, "#s7-in", 15.41);
+
+          // ================= S8 (15.55 – 23): the motto =================
+          var s8 = 15.55;
+          tl.fromTo("#s8-ghost", { x: 260, opacity: 0 }, { x: -200, opacity: 1, duration: 7.45, ease: "none" }, s8);
+          var mw = words("#s8 .motto");
+          // on the beat, word by word
+          tl.fromTo(mw, { opacity: 0, y: 70, filter: "blur(22px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out", stagger: BEAT / 2 }, s8 + 0.05);
+          tl.to("#s8 .motto", { scale: 1.03, duration: 7, ease: "none" }, s8 + 0.4);
+
+          // a few seconds later, on the strong cue (19.66s): "fun" lights up in purple
+          var FUN = 19.66;
+          tl.fromTo("#fun", { color: "#16101f", textShadow: "0 0 0px rgba(131,53,241,0)" }, { color: "#8335f1", textShadow: "0 0 40px rgba(131,53,241,0.75)", duration: 0.3, ease: "power2.out" }, FUN);
+          tl.fromTo("#fun-w", { scale: 1 }, { scale: 1.12, duration: 0.14, ease: "power2.out", yoyo: true, repeat: 1 }, FUN);
+          tl.fromTo("#fun-glow", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "power2.out" }, FUN);
+          tl.to("#s8-ghost", { color: "rgba(131,53,241,0.12)", duration: 0.5 }, FUN);
+          tl.fromTo("#s8-b1", { scale: 0, rotation: -60, opacity: 1 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2)" }, FUN + 0.05);
+          tl.to("#s8-b1", { rotation: 40, duration: 3, ease: "none" }, FUN + 0.5);
+
+          // sign-off
+          tl.fromTo("#s8-logo", { opacity: 0, y: 60, scale: 0.8, filter: "blur(16px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "power3.out" }, 20.5);
+          tl.fromTo("#s8-dev", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 20.9);
+
+          // ================= audio-reactive: the lit "fun" breathes with the bass =================
           var A = window.AUDIO_DATA;
-          var glow = document.getElementById("glow-a");
-          var pill = document.getElementById("s1-pillin");
-          for (var f = 0; f < A.bass.length; f++) {
+          var glow = document.getElementById("fun-glow");
+          for (var f = Math.ceil(FUN * A.fps) + 15; f < A.bass.length; f++) {
             tl.call((function (b) {
-              return function () {
-                var e = Math.min(1, b * 2.2);
-                glow.style.opacity = String(0.55 + 0.35 * e);
-                glow.style.scale = String(1 + 0.06 * e);
-                pill.style.boxShadow = "0 0 " + (50 + 60 * e).toFixed(0) + "px " + (4 + 10 * e).toFixed(0) + "px rgba(131, 53, 241, " + (0.4 + 0.4 * e).toFixed(3) + ")";
-              };
+              return function () { glow.style.opacity = String(0.7 + 0.3 * Math.min(1, b * 2.2)); };
             })(A.bass[f]), [], f / A.fps);
           }
 
